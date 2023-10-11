@@ -14,14 +14,9 @@ NativeLibrary.SetDllImportResolver(typeof(Sdl).Assembly, (name, _, _) =>
 	if (libSdl != 0)
 		return libSdl;
 
-	var libName =
-		OperatingSystem.IsLinux() ? "libSDL2.so" :
-		OperatingSystem.IsWindows() ? "SDL2.dll" :
-		throw new PlatformNotSupportedException();
-
-	var ridOs =
-		OperatingSystem.IsLinux() ? "linux" :
-		OperatingSystem.IsWindows() ? "win" :
+	var (ridOs, libName) =
+		OperatingSystem.IsLinux() ? ("linux", "libSDL2.so") :
+		OperatingSystem.IsWindows() ? ("win", "SDL2.dll") :
 		throw new PlatformNotSupportedException();
 
 	var ridPlatform = RuntimeInformation.ProcessArchitecture switch
@@ -55,7 +50,7 @@ Sdl.GL_SetSwapInterval(0);
 using (var renderer = new Renderer(new GlApi(Sdl.GL_GetProcAddress)))
 {
 	renderer.UpdateViewportSize(640, 480);
-	
+
 	while (open)
 	{
 		while (Sdl.PollEvent(out var ev))
@@ -86,8 +81,6 @@ using (var renderer = new Renderer(new GlApi(Sdl.GL_GetProcAddress)))
 		renderer.BatchCommit();
 
 		Sdl.GL_SwapWindow(window);
-
-		//Console.WriteLine(Stopwatch.GetElapsedTime(start).TotalMilliseconds);
 	}
 }
 
