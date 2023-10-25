@@ -13,8 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="../ARenderer/ARenderer.csproj" />
-		<ProjectReference Include="..\..\External\SdlSharp\Source\SdlSharp\SdlSharp.csproj" />
+		<ProjectReference Include="..\AppThing\AppThing.csproj" />
 	</ItemGroup>
 
 

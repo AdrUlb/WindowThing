@@ -1,90 +1,26 @@
-﻿using System.Drawing;
-using System.Runtime.InteropServices;
-using SdlSharp;
-using ARenderer;
-using Test;
+﻿using AppThing;
+using RenderThing;
+using System.Drawing;
 
-nint libSdl = 0;
-
-NativeLibrary.SetDllImportResolver(typeof(Sdl).Assembly, (name, _, _) =>
+using var win = new Window(new()
 {
-	if (name != Sdl.LibraryName)
-		return 0;
-
-	if (libSdl != 0)
-		return libSdl;
-
-	var (ridOs, libName) =
-		OperatingSystem.IsLinux() ? ("linux", "libSDL2.so") :
-		OperatingSystem.IsWindows() ? ("win", "SDL2.dll") :
-		throw new PlatformNotSupportedException();
-
-	var ridPlatform = RuntimeInformation.ProcessArchitecture switch
-	{
-		Architecture.X64 => "x64",
-		Architecture.X86 => "x86",
-		_ => throw new PlatformNotSupportedException()
-	};
-
-	var rid = $"{ridOs}-{ridPlatform}";
-	var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, libName);
-
-	libSdl = NativeLibrary.Load(libPath);
-
-	return libSdl;
+	Resizable = true
 });
 
-Sdl.Init(SdlInitFlags.Video);
-
-Sdl.GL_SetAttribute(SdlGlAttribute.ContextProfileMask, SdlGlProfile.Core);
-Sdl.GL_SetAttribute(SdlGlAttribute.ContextMajorVersion, 3);
-Sdl.GL_SetAttribute(SdlGlAttribute.ContextMinorVersion, 3);
-
-var window = Sdl.CreateWindow("Simple Renderer Test", 640, 480, SdlWindowFlags.OpenGl | SdlWindowFlags.Shown | SdlWindowFlags.Resizable);
-var context = Sdl.GL_CreateContext(window);
+using var font = new Font("/usr/share/fonts/TTF/arial.ttf", 8.0f);
 
 var open = true;
 
-Sdl.GL_SetSwapInterval(0);
+win.Close += () => open = false;
 
-using (var renderer = new Renderer(new GlApi(Sdl.GL_GetProcAddress)))
+win.Render += r =>
 {
-	renderer.UpdateViewportSize(640, 480);
+	r.Clear(Color.Black);
 
-	while (open)
-	{
-		while (Sdl.PollEvent(out var ev))
-		{
-			switch (ev.Type)
-			{
-				case SdlEventType.Quit:
-					open = false;
-					break;
-				case SdlEventType.WindowEvent:
-					switch (ev.Window.Event)
-					{
-						case SdlWindowEventId.SizeChanged:
-							Sdl.GetWindowSize(window, out var w, out var h);
-							renderer.UpdateViewportSize((uint)w, (uint)h);
-							break;
-					}
-					break;
-			}
-		}
+	r.FillRect(new(100, 100), new(100, 100), Color.Red);
+	r.FillRect(new(120, 120), new(100, 100), Color.Green);
+	r.FillRect(new(140, 140), new(100, 100), Color.Blue);
+	r.DrawText("This text is rendered in 8pt Arial!", font, new(150, 150));
+};
 
-		renderer.Clear(Color.Orange);
-
-		renderer.FillRect(new(100.0f, 100.0f), new(100.0f, 100.0f), Color.Red);
-		renderer.FillRect(new(150.0f, 150.0f), new(100.0f, 100.0f), Color.Green);
-		renderer.FillRect(new(200.0f, 200.0f), new(100.0f, 100.0f), Color.Blue);
-
-		renderer.BatchCommit();
-
-		Sdl.GL_SwapWindow(window);
-	}
-}
-
-Sdl.GL_DeleteContext(context);
-Sdl.DestroyWindow(window);
-
-Sdl.Quit();
+SpinWait.SpinUntil(() => !open);
