@@ -6,7 +6,7 @@ namespace AppThing;
 
 internal static class GlfwManager
 {
-	private static readonly List<Window> windows = new();
+	private static readonly List<RenderWindow> windows = new();
 	private static readonly object windowsLock = new();
 
 	private static nint libHandle = 0;
@@ -76,15 +76,15 @@ internal static class GlfwManager
 		}
 	}
 
-	internal static void RegisterWindow(Window window)
+	internal static void RegisterWindow(RenderWindow renderWindow)
 	{
 		lock (windowsLock)
-			windows.Add(window);
+			windows.Add(renderWindow);
 	}
 
-	internal static void UnregisterWindow(Window window)
+	internal static void UnregisterWindow(RenderWindow renderWindow)
 	{
 		lock (windowsLock)
-			windows.Remove(window);
+			windows.Remove(renderWindow);
 	}
 }
