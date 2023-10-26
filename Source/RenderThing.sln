@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppThing", "AppThing\AppThi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlfwSharp", "GlfwSharp\GlfwSharp.csproj", "{4871E98D-915F-4766-9939-1D9300854278}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuiThing", "GuiThing\GuiThing.csproj", "{5219E780-B0EF-4B4D-AA9D-3DC2B15220F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4871E98D-915F-4766-9939-1D9300854278}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4871E98D-915F-4766-9939-1D9300854278}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4871E98D-915F-4766-9939-1D9300854278}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5219E780-B0EF-4B4D-AA9D-3DC2B15220F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5219E780-B0EF-4B4D-AA9D-3DC2B15220F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5219E780-B0EF-4B4D-AA9D-3DC2B15220F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5219E780-B0EF-4B4D-AA9D-3DC2B15220F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

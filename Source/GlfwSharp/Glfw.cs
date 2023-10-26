@@ -77,6 +77,12 @@ public static partial class Glfw
 	[LibraryImport(LibraryName, EntryPoint = "glfwDestroyWindow")]
 	private static partial void NativeDestroyWindow(GlfwWindowPtr window);
 
+	[LibraryImport(LibraryName, EntryPoint = "glfwGetWindowSize")]
+	private static partial void NativeGetWindowSize(GlfwWindowPtr window, out int width, out int height);
+
+	[LibraryImport(LibraryName, EntryPoint = "glfwSetWindowSize")]
+	private static partial void NativeSetWindowSize(GlfwWindowPtr window, int width, int height);
+
 	[LibraryImport(LibraryName, EntryPoint = "glfwWindowShouldClose")]
 	private static partial int NativeWindowShouldClose(GlfwWindowPtr window);
 
@@ -120,6 +126,8 @@ public static partial class Glfw
 		NativeCreateWindow(width, height, title, monitor, share);
 
 	public static void DestroyWindow(GlfwWindowPtr window) => NativeDestroyWindow(window);
+	public static void GetWindowSize(GlfwWindowPtr window, out int width, out int height) => NativeGetWindowSize(window, out width, out height);
+	public static void SetWindowSize(GlfwWindowPtr window, int width, int height) => NativeSetWindowSize(window, width, height);
 	public static bool WindowShouldClose(GlfwWindowPtr window) => NativeWindowShouldClose(window) != 0;
 
 	public static void SetWindowShouldClose(GlfwWindowPtr window, bool value) => NativeSetWindowShouldClose(window, value ? 1 : 0);

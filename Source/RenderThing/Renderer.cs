@@ -15,6 +15,8 @@ public abstract class Renderer : IDisposable
 
 	public abstract void Commit();
 	
+	public void FillRect(float x, float y, float width, float height, Color color) => FillRect(new(x, y), new(width, height), color);
+
 	public void DrawTexture(Texture texture, Vector2 position, Vector2 size) =>
 		DrawTextureSection(texture, position, size, new(0f, 0f), new(texture.Width, texture.Height));
 

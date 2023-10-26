@@ -210,10 +210,10 @@ public sealed class GlRenderer : Renderer
 			gl.ActiveTexture(Constants.GL_TEXTURE0 + (uint)i);
 			gl.BindTexture(TextureTarget.Texture2D, knownTextures[texture]);
 
-			if (dirtyTextures.Contains(texture))
+			if (dirtyTextures.Remove(texture))
 			{
-				dirtyTextures.Remove(texture);
-				gl.TexSubImage2D<byte>(TextureTarget.Texture2D, 0, 0, 0, texture.Width, texture.Height, PixelFormat.Rgba, PixelType.UnsignedByte, texture.pixels);
+				gl.TexSubImage2D<byte>(TextureTarget.Texture2D, 0, 0, 0,
+					texture.Width, texture.Height, PixelFormat.Rgba, PixelType.UnsignedByte, texture.pixels);
 			}
 
 			textureUnits[i] = i;
@@ -231,7 +231,7 @@ public sealed class GlRenderer : Renderer
 		gl.BindVertexArray(vao.Id);
 		gl.DrawElements(DrawMode.Triangles, (uint)batchQuadCount * indicesPerQuad, IndexType.UnsignedInt, 0);
 		gl.BindVertexArray(0);
-		
+
 		batchQuadCount = 0;
 		batchTextureCount = 0;
 
@@ -330,7 +330,7 @@ public sealed class GlRenderer : Renderer
 		var top = sectionPos.Y / texture.Height;
 		var right = (sectionPos.X + sectionSize.X) / texture.Width;
 		var bottom = (sectionPos.Y + sectionSize.Y) / texture.Height;
-        
+
 		if (batchQuadCount >= maxQuadsPerBatch || batchTextureCount >= maxTexturesPerBatch)
 			BatchCommit();
 

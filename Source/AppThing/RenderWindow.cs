@@ -25,8 +25,17 @@ public class RenderWindow : IDisposable
 
 	private readonly Thread thread;
 
-	private readonly object resizeLock = new();
+	public Size Size
+	{
+		get
+		{
+			Glfw.GetWindowSize(glfwWindow, out var w, out var h);
+			return new(w, h);
+		}
 
+		set => Glfw.SetWindowSize(glfwWindow, value.Width, value.Height);
+	}
+	
 	public Vector2 ContentScale
 	{
 		get

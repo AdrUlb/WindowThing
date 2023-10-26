@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AppThing\AppThing.csproj" />
+		<ProjectReference Include="..\GuiThing\GuiThing.csproj" />
 	</ItemGroup>
 
 
