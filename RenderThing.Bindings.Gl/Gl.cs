@@ -1,0 +1,64 @@
+using System.Numerics;
+
+namespace RenderThing.Bindings.Gl;
+
+public abstract class Gl
+{
+	public abstract void Viewport(int x, int y, uint width, uint height);
+	public abstract void ClearColor(float red, float green, float blue, float alpha);
+	public abstract void Clear(ClearMask mask);
+	public abstract void GenBuffers(Span<uint> buffers);
+	public abstract uint GenBuffer();
+	public abstract void DeleteBuffers(ReadOnlySpan<uint> buffers);
+	public abstract void DeleteBuffer(uint buffer);
+	public abstract void BindBuffer(BufferTarget target, uint buffer);
+	public abstract void GenVertexArrays(Span<uint> arrays);
+	public abstract uint GenVertexArray();
+	public abstract void DeleteVertexArrays(ReadOnlySpan<uint> array);
+	public abstract void DeleteVertexArray(uint array);
+	public abstract void BindVertexArray(uint array);
+	public abstract void BufferData<T>(BufferTarget target, ReadOnlySpan<T> data, BufferUsage usage) where T : unmanaged;
+	public abstract void BufferData(BufferTarget target, nuint size, nuint data, BufferUsage usage);
+	public abstract void BufferSubData<T>(BufferTarget target, nint offset, ReadOnlySpan<T> data) where T : unmanaged;
+	public abstract void VertexAttribPointer(uint index, int size, VertexAttribType type, bool normalized, uint stride, nuint pointer);
+	public abstract void VertexAttribIPointer(uint index, int size, VertexAttribType type, uint stride, nuint pointer);
+	public abstract void EnableVertexAttribArray(uint index);
+	public abstract void DisableVertexAttribArray(uint index);
+	public abstract void DrawArrays(DrawMode mode, int first, uint count);
+	public abstract uint CreateShader(ShaderType shaderType);
+	public abstract void DeleteShader(uint shader);
+	public abstract void ShaderSource(uint shader, string source);
+	public abstract void CompileShader(uint shader);
+	public abstract int GetShaderiv(uint shader, ShaderParameterName pname);
+	public abstract string GetShaderInfoLog(uint shader);
+	public abstract uint CreateProgram();
+	public abstract void DeleteProgram(uint program);
+	public abstract void AttachShader(uint program, uint shader);
+	public abstract void DetachShader(uint program, uint shader);
+	public abstract void LinkProgram(uint program);
+	public abstract int GetProgramiv(uint program, ProgramParameterName pname);
+	public abstract string GetProgramInfoLog(uint program);
+	public abstract void UseProgram(uint program);
+	public abstract int GetUniformLocation(uint program, string name);
+	public abstract void UniformMatrix4fv(int location, uint count, bool transpose, in Matrix4x4 value);
+	public abstract void Uniform1iv(int location, ReadOnlySpan<int> value);
+	public abstract void DrawElements<T>(DrawMode mode, uint count, IndexType type, Span<T> indices) where T : unmanaged;
+	public abstract void DrawElements(DrawMode mode, uint count, IndexType type, nuint indices);
+	public abstract void GenTextures(Span<uint> textures);
+	public abstract uint GenTexture();
+	public abstract void DeleteTextures(ReadOnlySpan<uint> textures);
+	public abstract void DeleteTexture(uint texture);
+	public abstract void BindTexture(TextureTarget target, uint texture);
+	public abstract void TexImage2D<T>(TextureTarget target, int level, InternalFormat internalFormat, uint width, uint height, int border, PixelFormat format, PixelType type, ReadOnlySpan<T> data) where T : unmanaged;
+	public abstract void TexImage2D(TextureTarget target, int level, InternalFormat internalFormat, uint width, uint height, int border, PixelFormat format, PixelType type, nuint data);
+	public abstract void TexSubImage2D<T>(TextureTarget target, int level, int xoffset, int yoffset, uint width, uint height, PixelFormat format, PixelType type, ReadOnlySpan<T> data) where T : unmanaged;
+	public abstract void GenerateMipmap(TextureTarget target);
+	public abstract void TexParameteri(TextureTarget target, TextureParameter pname, int param);
+	public abstract void ActiveTexture(uint texture);
+	public abstract void GetIntegerv(IntegerParameterName pname, Span<int> data);
+    public abstract void GetIntegerv(IntegerParameterName pname, out int data);
+    public abstract string GetString(StringName name);
+    public abstract void Enable(Cap cap);
+    public abstract void Disable(Cap cap);
+    public abstract void BlendFunc(BlendFactor sfactor, BlendFactor dfactor);
+}
