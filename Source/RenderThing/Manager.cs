@@ -15,6 +15,37 @@ internal static class Manager
 
 	internal static FtLibrary FtLib;
 
+	private static DllImportResolver CreateImportResolver(string libraryName, IReadOnlyDictionary<OSPlatform, string> libraryFileNames)
+	{
+		return (libraryName, assembly, searchPath) =>
+		{
+			if (libraryName != Glfw.LibraryName)
+				return 0;
+
+			if (libGlfwHandle != 0)
+				return libGlfwHandle;
+
+			var (ridOs, libName) =
+				OperatingSystem.IsLinux() ? ("linux", "libglfw.so.3.3") :
+				OperatingSystem.IsWindows() ? ("win", "glfw3.dll") :
+				throw new PlatformNotSupportedException();
+
+			var ridPlatform = RuntimeInformation.ProcessArchitecture switch
+			{
+				Architecture.X64 => "x64",
+				Architecture.X86 => "x86",
+				_ => throw new PlatformNotSupportedException()
+			};
+
+			var rid = $"{ridOs}-{ridPlatform}";
+			var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, "native", libName);
+
+			libGlfwHandle = NativeLibrary.Load(libPath);
+
+			return libGlfwHandle;
+		};
+	}
+
 	private static nint GlfwImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
 	{
 		if (libraryName != Glfw.LibraryName)
@@ -36,7 +67,7 @@ internal static class Manager
 		};
 
 		var rid = $"{ridOs}-{ridPlatform}";
-		var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, libName);
+		var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, "native", libName);
 
 		libGlfwHandle = NativeLibrary.Load(libPath);
 
@@ -64,7 +95,7 @@ internal static class Manager
 		};
 
 		var rid = $"{ridOs}-{ridPlatform}";
-		var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, libName);
+		var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, "native", libName);
 
 		libFreetypeHandle = NativeLibrary.Load(libPath);
 
@@ -75,7 +106,7 @@ internal static class Manager
 	{
 		Clean();
 	}
-	
+
 	internal static void Init()
 	{
 		lock (initLock)
@@ -83,8 +114,13 @@ internal static class Manager
 			if (isInit)
 				return;
 
-			NativeLibrary.SetDllImportResolver(typeof(Glfw).Assembly, GlfwImportResolver);
-			NativeLibrary.SetDllImportResolver(typeof(Ft).Assembly, FreetypeImportResolver);
+			try
+			{
+				NativeLibrary.SetDllImportResolver(typeof(Glfw).Assembly, GlfwImportResolver);
+				NativeLibrary.SetDllImportResolver(typeof(Ft).Assembly, FreetypeImportResolver);
+			}
+			catch { }
+
 			Glfw.Init();
 			Ft.InitFreeType(out FtLib);
 			AppDomain.CurrentDomain.ProcessExit += AppDomain_CurrentDomain_ProcessExit;

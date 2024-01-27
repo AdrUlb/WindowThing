@@ -8,10 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="runtimes/**" CopyToOutputDirectory="Always" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\RenderThing.Bindings.FreeType\RenderThing.Bindings.FreeType.csproj" />
 		<ProjectReference Include="..\RenderThing.Bindings.Glfw\RenderThing.Bindings.Glfw.csproj" PrivateAssets="compile" />
 		<ProjectReference Include="..\RenderThing.Bindings.Gl\RenderThing.Bindings.Gl.csproj" />

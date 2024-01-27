@@ -6,7 +6,6 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace RenderThing;
 
@@ -75,7 +74,7 @@ public sealed class Renderer : IDisposable
 
 	private const int _verticesPerQuad = 4;
 	private const int _indicesPerQuad = 6;
-	private const int _maxQuadsPerBatch = 2_000_000;
+	private const int _maxQuadsPerBatch = 20_000;
 
 	internal readonly Gl _gl;
 
@@ -266,12 +265,22 @@ public sealed class Renderer : IDisposable
 		);
 	}
 
+	public void DrawTexture(Texture texture, Vector2 position, Vector2 size, Color tint) =>
+		DrawTextureSection(texture, new(0, 0), new(texture.Width, texture.Height), position, size, tint);
+
 	public void DrawText(string text, Font font, Vector2 position, Color color)
 	{
 		var pos = position;
 
 		foreach (var c in text)
 		{
+			if (c == '\n')
+			{
+				pos.Y += font.Size;
+				pos.X = position.X;
+				continue;
+			}
+
 			var fontChar = font.GetChar(c);
 
 			var visiblePos = pos + (fontChar.DrawOffset with { Y = font.Size - fontChar.DrawOffset.Y });
