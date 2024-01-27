@@ -13,7 +13,7 @@ internal sealed class MainWindow() : Window(resizable: false, visible: true)
 	private Texture _tex2 = null!;
 	private Font _font = null!;
 
-	string randStr;
+	string randStr = null!;
 
 	protected override void OnRun()
 	{

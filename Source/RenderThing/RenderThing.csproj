@@ -13,4 +13,9 @@
 		<ProjectReference Include="..\RenderThing.Bindings.Gl\RenderThing.Bindings.Gl.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="../../NativeLibs/win-x64/freetype.dll" Link="runtimes/win-x64/native/freetype.dll" CopyToOutputDirectory="Always" />
+		<None Include="../../NativeLibs/win-x64/glfw3.dll" Link="runtimes/win-x64/native/glfw3.dll" CopyToOutputDirectory="Always" />
+	</ItemGroup>
+
 </Project>

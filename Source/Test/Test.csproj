@@ -17,11 +17,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="../../NativeLibs/win-x64/freetype.dll" Link="runtimes/win-x64/native/freetype.dll" CopyToOutputDirectory="Always" />
-		<None Include="../../NativeLibs/win-x64/glfw3.dll" Link="runtimes/win-x64/native/glfw3.dll" CopyToOutputDirectory="Always" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.0" />
 	</ItemGroup>
 

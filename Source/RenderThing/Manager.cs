@@ -7,52 +7,21 @@ namespace RenderThing;
 
 internal static class Manager
 {
-	private static bool isInit;
-	private static readonly object initLock = new();
+	private static bool _isInit;
+	private static readonly object _initLock = new();
 
-	private static nint libGlfwHandle = 0;
-	private static nint libFreetypeHandle = 0;
+	private static nint _libGlfwHandle = 0;
+	private static nint _libFreetypeHandle = 0;
 
 	internal static FtLibrary FtLib;
-
-	private static DllImportResolver CreateImportResolver(string libraryName, IReadOnlyDictionary<OSPlatform, string> libraryFileNames)
-	{
-		return (libraryName, assembly, searchPath) =>
-		{
-			if (libraryName != Glfw.LibraryName)
-				return 0;
-
-			if (libGlfwHandle != 0)
-				return libGlfwHandle;
-
-			var (ridOs, libName) =
-				OperatingSystem.IsLinux() ? ("linux", "libglfw.so.3.3") :
-				OperatingSystem.IsWindows() ? ("win", "glfw3.dll") :
-				throw new PlatformNotSupportedException();
-
-			var ridPlatform = RuntimeInformation.ProcessArchitecture switch
-			{
-				Architecture.X64 => "x64",
-				Architecture.X86 => "x86",
-				_ => throw new PlatformNotSupportedException()
-			};
-
-			var rid = $"{ridOs}-{ridPlatform}";
-			var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, "native", libName);
-
-			libGlfwHandle = NativeLibrary.Load(libPath);
-
-			return libGlfwHandle;
-		};
-	}
 
 	private static nint GlfwImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
 	{
 		if (libraryName != Glfw.LibraryName)
 			return 0;
 
-		if (libGlfwHandle != 0)
-			return libGlfwHandle;
+		if (_libGlfwHandle != 0)
+			return _libGlfwHandle;
 
 		var (ridOs, libName) =
 			OperatingSystem.IsLinux() ? ("linux", "libglfw.so.3.3") :
@@ -69,9 +38,9 @@ internal static class Manager
 		var rid = $"{ridOs}-{ridPlatform}";
 		var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, "native", libName);
 
-		libGlfwHandle = NativeLibrary.Load(libPath);
+		_libGlfwHandle = NativeLibrary.Load(libPath);
 
-		return libGlfwHandle;
+		return _libGlfwHandle;
 	}
 
 	private static nint FreetypeImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
@@ -79,8 +48,8 @@ internal static class Manager
 		if (libraryName != Ft.LibraryName)
 			return 0;
 
-		if (libFreetypeHandle != 0)
-			return libFreetypeHandle;
+		if (_libFreetypeHandle != 0)
+			return _libFreetypeHandle;
 
 		var (ridOs, libName) =
 			OperatingSystem.IsLinux() ? ("linux", "libfreetype.so") :
@@ -97,9 +66,9 @@ internal static class Manager
 		var rid = $"{ridOs}-{ridPlatform}";
 		var libPath = Path.Combine(AppContext.BaseDirectory, "runtimes", rid, "native", libName);
 
-		libFreetypeHandle = NativeLibrary.Load(libPath);
+		_libFreetypeHandle = NativeLibrary.Load(libPath);
 
-		return libFreetypeHandle;
+		return _libFreetypeHandle;
 	}
 
 	private static void AppDomain_CurrentDomain_ProcessExit(object? sender, EventArgs args)
@@ -109,9 +78,9 @@ internal static class Manager
 
 	internal static void Init()
 	{
-		lock (initLock)
+		lock (_initLock)
 		{
-			if (isInit)
+			if (_isInit)
 				return;
 
 			try
@@ -125,22 +94,22 @@ internal static class Manager
 			Ft.InitFreeType(out FtLib);
 			AppDomain.CurrentDomain.ProcessExit += AppDomain_CurrentDomain_ProcessExit;
 
-			isInit = true;
+			_isInit = true;
 		}
 	}
 
 	internal static void Clean()
 	{
-		lock (initLock)
+		lock (_initLock)
 		{
-			if (!isInit)
+			if (!_isInit)
 				return;
 
 			AppDomain.CurrentDomain.ProcessExit -= AppDomain_CurrentDomain_ProcessExit;
 			Ft.DoneFreeType(FtLib);
 			Glfw.Terminate();
 
-			isInit = false;
+			_isInit = false;
 		}
 	}
 }
