@@ -1,6 +1,7 @@
 using RenderThing.Bindings.Gl;
 using RenderThing.Bindings.Glfw;
 using System.Drawing;
+using System.Numerics;
 
 namespace RenderThing;
 
@@ -11,11 +12,18 @@ public abstract class Window : IDisposable
 
 	private bool _running = false;
 
+#pragma warning disable IDE0052 // Remove unread private members
 	private readonly Glfw.WindowCloseFun _closeFun;
 	private readonly Glfw.FramebufferSizeFun _frameBufferSizeFun;
+	private readonly Glfw.MouseButtonFun _mouseButtonCallback;
+	private readonly Glfw.CursorPosFun _cursorPosCallback;
+	private readonly Glfw.KeyFun _keyCallback;
+#pragma warning restore IDE0052 // Remove unread private members
 
 	private string _title;
 	private bool _isVisible;
+
+	public Vector2 MousePosition { get; private set; }
 
 	public string Title
 	{
@@ -79,6 +87,41 @@ public abstract class Window : IDisposable
 
 		Glfw.SetFramebufferSizeCallback(_glfwWindow, _frameBufferSizeFun = (_, w, h) => HandleFramebufferResize(w, h));
 
+		Glfw.SetMouseButtonCallback(_glfwWindow, _mouseButtonCallback = (_, button, action, mods) =>
+		{
+			switch (action)
+			{
+				case MouseButtonAction.Press:
+					OnMouseDown(button, (ModifierKeys)mods);
+					break;
+				case MouseButtonAction.Release:
+					OnMouseUp(button, (ModifierKeys)mods);
+					break;
+			}
+		});
+
+		Glfw.SetCursorPosCallback(_glfwWindow, _cursorPosCallback = (_, xpos, ypos) =>
+		{
+			var pos = new Vector2((float)xpos, (float)ypos);
+			MousePosition = pos;
+			OnMouseMove(pos);
+		});
+
+		Glfw.SetKeyCallback(_glfwWindow, _keyCallback = (_, key, scancode, action, mods) =>
+		{
+			switch (action)
+			{
+				case 0: // Release
+					OnKeyUp((KeyboardKey)key, (ModifierKeys)mods);
+					break;
+				case 1: // Press
+					OnKeyDown((KeyboardKey)key, (ModifierKeys)mods);
+					break;
+				case 2: // Repeat
+					break;
+			}
+		});
+
 		IsVisible = visible;
 	}
 
@@ -121,6 +164,15 @@ public abstract class Window : IDisposable
 	protected abstract void OnCloseClicked();
 
 	protected abstract void OnRender(Renderer renderer);
+
+	protected virtual void OnMouseDown(int button, ModifierKeys modifiers) { }
+
+	protected virtual void OnMouseUp(int button, ModifierKeys modifiers) { }
+
+	protected virtual void OnKeyDown(KeyboardKey key, ModifierKeys modifiers) { }
+	protected virtual void OnKeyUp(KeyboardKey key, ModifierKeys modifiers) { }
+
+	protected virtual void OnMouseMove(Vector2 position) { }
 
 	protected virtual void Dispose(bool disposing)
 	{

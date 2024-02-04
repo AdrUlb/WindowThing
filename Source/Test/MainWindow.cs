@@ -101,4 +101,14 @@ internal sealed class MainWindow() : Window(resizable: false, visible: true)
 		}
 		_stopwatch.Restart();
 	}
+
+	protected override void OnKeyDown(KeyboardKey key, ModifierKeys modifiers)
+	{
+		Console.WriteLine($"down: {key}");
+	}
+
+	protected override void OnKeyUp(KeyboardKey key, ModifierKeys modifiers)
+	{
+		Console.WriteLine($"up: {key}");
+	}
 }

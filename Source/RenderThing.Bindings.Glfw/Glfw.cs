@@ -65,6 +65,9 @@ public static partial class Glfw
 
 	public delegate void FramebufferSizeFun(GlfwWindowPtr window, int width, int height);
 	public delegate void WindowCloseFun(GlfwWindowPtr window);
+	public delegate void MouseButtonFun(GlfwWindowPtr window, int button, MouseButtonAction action, int mods);
+	public delegate void CursorPosFun(GlfwWindowPtr window, double xpos, double ypos);
+	public delegate void KeyFun(GlfwWindowPtr window, int key, int scancode, int action, int mods);
 
 	[LibraryImport(LibraryName, EntryPoint = "glfwInit")]
 	private static partial int NativeInit();
@@ -99,6 +102,15 @@ public static partial class Glfw
 
 	[LibraryImport(LibraryName, EntryPoint = "glfwSetWindowCloseCallback")]
 	private static partial WindowCloseFun NativeSetWindowCloseCallback(GlfwWindowPtr window, WindowCloseFun callback);
+
+	[LibraryImport(LibraryName, EntryPoint = "glfwSetMouseButtonCallback")]
+	private static partial MouseButtonFun NativeSetMouseButtonCallback(GlfwWindowPtr window, MouseButtonFun callback);
+
+	[LibraryImport(LibraryName, EntryPoint = "glfwSetCursorPosCallback")]
+	private static partial CursorPosFun NativeSetCursorPosCallback(GlfwWindowPtr window, CursorPosFun callback);
+
+	[LibraryImport(LibraryName, EntryPoint = "glfwSetKeyCallback")]
+	private static partial KeyFun NativeSetKeyCallback(GlfwWindowPtr window, KeyFun callback);
 
 	[LibraryImport(LibraryName, EntryPoint = "glfwWindowHint")]
 	private static partial void NativeWindowHint(GlfwWindowHint hint, int value);
@@ -155,6 +167,12 @@ public static partial class Glfw
 
 	public static WindowCloseFun SetWindowCloseCallback(GlfwWindowPtr window, WindowCloseFun callback) =>
 		NativeSetWindowCloseCallback(window, callback);
+
+	public static MouseButtonFun SetMouseButtonCallback(GlfwWindowPtr window, MouseButtonFun callback) => NativeSetMouseButtonCallback(window, callback);
+
+	public static CursorPosFun SetCursorPosCallback(GlfwWindowPtr window, CursorPosFun callback) => NativeSetCursorPosCallback(window, callback);
+
+	public static KeyFun SetKeyCallback(GlfwWindowPtr window, KeyFun callback) => NativeSetKeyCallback(window, callback);
 
 	public static void WindowHint(GlfwWindowHint hint, int value) => NativeWindowHint(hint, value);
 
