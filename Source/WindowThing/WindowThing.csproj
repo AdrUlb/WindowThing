@@ -8,9 +8,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RenderThing.Bindings.FreeType\RenderThing.Bindings.FreeType.csproj" />
-		<ProjectReference Include="..\RenderThing.Bindings.Glfw\RenderThing.Bindings.Glfw.csproj" PrivateAssets="compile" />
-		<ProjectReference Include="..\RenderThing.Bindings.Gl\RenderThing.Bindings.Gl.csproj" />
+		<ProjectReference Include="..\WindowThing.Bindings.FreeType\WindowThing.Bindings.FreeType.csproj" />
+		<ProjectReference Include="..\WindowThing.Bindings.Glfw\WindowThing.Bindings.Glfw.csproj" PrivateAssets="compile" />
+		<ProjectReference Include="..\WindowThing.Bindings.Gl\WindowThing.Bindings.Gl.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -65,9 +65,9 @@ public static partial class Glfw
 
 	public delegate void FramebufferSizeFun(GlfwWindowPtr window, int width, int height);
 	public delegate void WindowCloseFun(GlfwWindowPtr window);
-	public delegate void MouseButtonFun(GlfwWindowPtr window, int button, MouseButtonAction action, int mods);
+	public delegate void MouseButtonFun(GlfwWindowPtr window, int button, GlfwMouseButtonAction action, GlfwModifierKeys mods);
 	public delegate void CursorPosFun(GlfwWindowPtr window, double xpos, double ypos);
-	public delegate void KeyFun(GlfwWindowPtr window, int key, int scancode, int action, int mods);
+	public delegate void KeyFun(GlfwWindowPtr window, int key, int scancode, GlfwKeyAction action, GlfwModifierKeys mods);
 
 	[LibraryImport(LibraryName, EntryPoint = "glfwInit")]
 	private static partial int NativeInit();

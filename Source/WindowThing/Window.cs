@@ -71,14 +71,13 @@ public abstract class Window : IDisposable
 		Glfw.WindowHint(GlfwWindowHint.Resizable, resizable ? 1 : 0);
 		Glfw.WindowHint(GlfwWindowHint.Visible, 0);
 
-		_glfwWindow = Glfw.CreateWindow(400, 400, "", 0, 0);
+		_title = "WindowThing";
+
+		_glfwWindow = Glfw.CreateWindow(640, 480, _title, 0, 0);
 		Glfw.MakeContextCurrent(_glfwWindow);
 		Glfw.SwapInterval(0);
 
 		Glfw.SetWindowCloseCallback(_glfwWindow, _closeFun = _ => OnCloseClicked());
-
-		Title = _title = "RenderThing Window";
-		Size = new(640, 480);
 
 		renderer = new(new DesktopGl(Glfw.GetProcAddress));
 		renderer.SetViewportSize((uint)Size.Width, (uint)Size.Height);
@@ -91,10 +90,10 @@ public abstract class Window : IDisposable
 		{
 			switch (action)
 			{
-				case MouseButtonAction.Press:
+				case GlfwMouseButtonAction.Press:
 					OnMouseDown(button, (ModifierKeys)mods);
 					break;
-				case MouseButtonAction.Release:
+				case GlfwMouseButtonAction.Release:
 					OnMouseUp(button, (ModifierKeys)mods);
 					break;
 			}
@@ -111,13 +110,13 @@ public abstract class Window : IDisposable
 		{
 			switch (action)
 			{
-				case 0: // Release
+				case GlfwKeyAction.Release: // Release
 					OnKeyUp((KeyboardKey)key, (ModifierKeys)mods);
 					break;
-				case 1: // Press
+				case GlfwKeyAction.Press: // Press
 					OnKeyDown((KeyboardKey)key, (ModifierKeys)mods);
 					break;
-				case 2: // Repeat
+				case GlfwKeyAction.Repeat: // Repeat
 					break;
 			}
 		});
@@ -177,7 +176,10 @@ public abstract class Window : IDisposable
 	protected virtual void Dispose(bool disposing)
 	{
 		Glfw.MakeContextCurrent(_glfwWindow);
-		renderer.Dispose();
+
+		if (disposing)
+			renderer.Dispose();
+
 		Glfw.MakeContextCurrent(0);
 		Glfw.DestroyWindow(_glfwWindow);
 	}

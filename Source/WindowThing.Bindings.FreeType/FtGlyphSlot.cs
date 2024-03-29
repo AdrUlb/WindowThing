@@ -1,3 +1,5 @@
+#pragma warning disable IDE0051 // Remove unused private members
+
 using FtInt = System.Int32;
 using FtUInt = System.UInt32;
 
@@ -10,18 +12,18 @@ public unsafe readonly struct FtGlyphSlot
 
 public unsafe struct FtGlyphSlotRec
 {
-	private FtLibrary library;
-	private FtFace face;
-	private FtGlyphSlot next;
-	private FtUInt glyph_index;
-	private FtGeneric generic;
+	private readonly FtLibrary library;
+	private readonly FtFace face;
+	private readonly FtGlyphSlot next;
+	private readonly FtUInt glyph_index;
+	private readonly FtGeneric generic;
 	
 	public FtGlyphMetrics metrics;
 	private FtFixed linearHoriAdvance;
 	private FtFixed linearVertAdvance;
 	public FtVector advance;
 	
-	private FtGlyphFormat format;
+	private readonly FtGlyphFormat format;
 	
 	public FtBitmap bitmap;
 	public FtInt bitmap_left;

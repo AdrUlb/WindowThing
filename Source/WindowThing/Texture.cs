@@ -20,6 +20,7 @@ public sealed class Texture : IDisposable
 		_gl = Renderer.ThreadGl ?? throw new("No active GL context on this thread.");
 
 		Id = _gl.GenTexture();
+
 		_gl.BindTexture(TextureTarget.Texture2D, Id);
 		_gl.TexParameteri(TextureTarget.Texture2D, TextureParameter.WrapS, (int)TextureWrap.Repeat);
 		_gl.TexParameteri(TextureTarget.Texture2D, TextureParameter.WrapT, (int)TextureWrap.Repeat);
@@ -54,7 +55,7 @@ public sealed class Texture : IDisposable
 			for (var y = 0; y < copyH; y++)
 			{
 				var start = y * (int)oldW * 4;
-				var end = start + (int)copyW * 4;
+				var end = start + ((int)copyW * 4);
 				oldPixels.AsSpan()[start..end].CopyTo(_pixels.AsSpan()[(y * (int)Width * 4)..]);
 			}
 		}
