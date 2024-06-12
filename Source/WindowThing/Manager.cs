@@ -26,6 +26,7 @@ internal static class Manager
 		var (ridOs, libName) =
 			OperatingSystem.IsLinux() ? ("linux", "libglfw.so.3.3") :
 			OperatingSystem.IsWindows() ? ("win", "glfw3.dll") :
+			OperatingSystem.IsMacOS() ? ("osx", "libglfw.dylib") :
 			throw new PlatformNotSupportedException();
 
 		var ridPlatform = RuntimeInformation.ProcessArchitecture switch
@@ -54,6 +55,7 @@ internal static class Manager
 		var (ridOs, libName) =
 			OperatingSystem.IsLinux() ? ("linux", "libfreetype.so") :
 			OperatingSystem.IsWindows() ? ("win", "freetype.dll") :
+			OperatingSystem.IsMacOS() ? ("osx", "libfreetype.dylib") :
 			throw new PlatformNotSupportedException();
 
 		var ridPlatform = RuntimeInformation.ProcessArchitecture switch

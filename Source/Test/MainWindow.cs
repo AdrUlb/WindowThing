@@ -1,4 +1,5 @@
 ﻿using RenderThing;
+using SixLabors.ImageSharp;
 
 namespace Test;
 
@@ -21,6 +22,7 @@ internal sealed class MainWindow() : Window(resizable: false, visible: true)
 
 	protected override void OnRender(Renderer renderer)
 	{
+		renderer.Clear(System.Drawing.Color.CornflowerBlue);
 	}
 
 	protected override void OnKeyDown(KeyboardKey key, ModifierKeys modifiers)

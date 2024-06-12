@@ -22,7 +22,7 @@ public sealed class Renderer : IDisposable
 
 	private const string _vertexShaderSource =
 		"""
-		#version 300 es
+		#version 330 core
 		precision mediump float;
 
 		layout (location = 0) in vec2 aPos;
@@ -47,7 +47,7 @@ public sealed class Renderer : IDisposable
 
 	private const string _fragmentShaderSource =
 		"""
-		#version 300 es
+		#version 330 core
 		precision lowp float;
 
 		in vec4 vColor;

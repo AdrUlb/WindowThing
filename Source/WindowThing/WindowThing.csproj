@@ -16,6 +16,8 @@
 	<ItemGroup>
 		<None Include="../../NativeLibs/win-x64/freetype.dll" Link="runtimes/win-x64/native/freetype.dll" CopyToOutputDirectory="Always" />
 		<None Include="../../NativeLibs/win-x64/glfw3.dll" Link="runtimes/win-x64/native/glfw3.dll" CopyToOutputDirectory="Always" />
+		<None Include="../../NativeLibs/osx-x64/libglfw.dylib" Link="runtimes/osx-x64/native/libglfw.dylib" CopyToOutputDirectory="Always" />
+		<None Include="../../NativeLibs/osx-x64/libfreetype.dylib" Link="runtimes/osx-x64/native/libfreetype.dylib" CopyToOutputDirectory="Always" />
 	</ItemGroup>
 
 </Project>
