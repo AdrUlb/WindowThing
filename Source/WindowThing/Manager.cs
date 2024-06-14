@@ -24,7 +24,7 @@ internal static class Manager
 			return _libGlfwHandle;
 
 		var (ridOs, libName) =
-			OperatingSystem.IsLinux() ? ("linux", "libglfw.so.3.3") :
+			OperatingSystem.IsLinux() ? ("linux", "libglfw.so") :
 			OperatingSystem.IsWindows() ? ("win", "glfw3.dll") :
 			OperatingSystem.IsMacOS() ? ("osx", "libglfw.dylib") :
 			throw new PlatformNotSupportedException();
