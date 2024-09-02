@@ -1,4 +1,4 @@
-namespace RenderThing.Bindings.FreeType;
+namespace WindowThing.Bindings.FreeType;
 
 public enum FtError
 {
@@ -24,7 +24,7 @@ public enum FtError
 	InvalidComposite = 0x15,
 	TooManyHints = 0x16,
 	InvalidPixelSize = 0x17,
-	InvalidSVGDocument = 0x18,
+	InvalidSvgDocument = 0x18,
 	/* handle errors */
 	InvalidHandle = 0x20,
 	InvalidLibraryHandle = 0x21,
@@ -66,8 +66,8 @@ public enum FtError
 	DivideByZero = 0x85,
 	InvalidReference = 0x86,
 	DebugOpCode = 0x87,
-	ENDFInExecStream = 0x88,
-	NestedDEFS = 0x89,
+	EndfInExecStream = 0x88,
+	NestedDefs = 0x89,
 	InvalidCodeRange = 0x8A,
 	ExecutionTooLong = 0x8B,
 	TooManyFunctionDefs = 0x8C,
@@ -86,9 +86,9 @@ public enum FtError
 	CouldNotFindContext = 0x99,
 	InvalidPostTableFormat = 0x9A,
 	InvalidPostTable = 0x9B,
-	DEFInGlyfBytecode = 0x9C,
+	DefInGlyfBytecode = 0x9C,
 	MissingBitmap = 0x9D,
-	MissingSVGHooks = 0x9E,
+	MissingSvgHooks = 0x9E,
 	/* CFF, CID, and Type 1 errors */
 	SyntaxError = 0xA0,
 	StackUnderflow = 0xA1,

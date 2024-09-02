@@ -1,24 +1,24 @@
-using static RenderThing.Bindings.Gl.Constants;
+using static WindowThing.Bindings.Gl.Constants;
 using GLenum = System.UInt32;
 
-namespace RenderThing.Bindings.Gl;
+namespace WindowThing.Bindings.Gl;
 
 public enum PixelType : GLenum
 {
-	UnsignedByte = GL_UNSIGNED_BYTE,
-	Byte = GL_BYTE,
-	UnsignedShort = GL_UNSIGNED_SHORT,
-	Short = GL_SHORT,
-	UnsignedInt = GL_UNSIGNED_INT,
-	Int = GL_INT,
-	HalfFloat = GL_HALF_FLOAT,
-	Float = GL_FLOAT,
-	UnsignedShort5_6_5 = GL_UNSIGNED_SHORT_5_6_5,
-	UnsignedShort4_4_4_4 = GL_UNSIGNED_SHORT_4_4_4_4,
-	UnsignedShort5_5_5_1 = GL_UNSIGNED_SHORT_5_5_5_1,
-	UnsignedInt2_10_10_10_REV = GL_UNSIGNED_INT_2_10_10_10_REV,
-	UnsignedInt10F_11F_11F_REV = GL_UNSIGNED_INT_10F_11F_11F_REV,
-	UnsignedInt5_9_9_9_REV = GL_UNSIGNED_INT_5_9_9_9_REV,
-	UnsignedInt24_8 = GL_UNSIGNED_INT_24_8,
-	Float32UnsignedInt24_8_REV = GL_FLOAT_32_UNSIGNED_INT_24_8_REV
+	UnsignedByte = _glUnsignedByte,
+	Byte = _glByte,
+	UnsignedShort = _glUnsignedShort,
+	Short = _glShort,
+	UnsignedInt = _glUnsignedInt,
+	Int = _glInt,
+	HalfFloat = _glHalfFloat,
+	Float = _glFloat,
+	UnsignedShort565 = _glUnsignedShort565,
+	UnsignedShort4444 = _glUnsignedShort4444,
+	UnsignedShort5551 = _glUnsignedShort5551,
+	UnsignedInt2101010Rev = _glUnsignedInt2101010Rev,
+	UnsignedInt10F11F11FRev = _glUnsignedInt10F11F11FRev,
+	UnsignedInt5999Rev = _glUnsignedInt5999Rev,
+	UnsignedInt248 = _glUnsignedInt248,
+	Float32UnsignedInt248Rev = _glFloat32UnsignedInt248Rev
 }

@@ -1,4 +1,4 @@
-namespace RenderThing.Bindings.Gl.Abstractions;
+namespace WindowThing.Bindings.Gl.Abstractions;
 
 public readonly struct BufferObject(Gl gl) : IDisposable
 {

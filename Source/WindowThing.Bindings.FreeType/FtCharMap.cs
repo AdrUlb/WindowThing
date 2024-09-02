@@ -1,11 +1,8 @@
-namespace RenderThing.Bindings.FreeType;
+namespace WindowThing.Bindings.FreeType;
 
-internal unsafe readonly struct FtCharMap
+internal readonly struct FtCharMap
 {
-	public readonly FtCharMapRec* Rec;
-}
-
-internal struct FtCharMapRec
-{
-	
+#pragma warning disable CS0169 // Field is never used
+	private readonly nint _rec;
+#pragma warning restore CS0169 // Field is never used
 }

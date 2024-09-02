@@ -1,4 +1,4 @@
-﻿namespace RenderThing.Bindings.Glfw;
+﻿namespace WindowThing.Bindings.Glfw;
 
 public enum GlfwMouseButtonAction
 {

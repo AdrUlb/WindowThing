@@ -1,14 +1,14 @@
-using RenderThing.Bindings.FreeType;
-using RenderThing.Bindings.Glfw;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using WindowThing.Bindings.FreeType;
+using WindowThing.Bindings.Glfw;
 
-namespace RenderThing;
+namespace WindowThing;
 
 internal static class Manager
 {
 	private static bool _isInit;
-	private static readonly object _initLock = new();
+	private static readonly object InitLock = new();
 
 	private static nint _libGlfwHandle = 0;
 	private static nint _libFreetypeHandle = 0;
@@ -46,7 +46,7 @@ internal static class Manager
 
 	private static nint FreetypeImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
 	{
-		if (libraryName != Ft.LibraryName)
+		if (libraryName != Ft._libraryName)
 			return 0;
 
 		if (_libFreetypeHandle != 0)
@@ -80,7 +80,7 @@ internal static class Manager
 
 	internal static void Init()
 	{
-		lock (_initLock)
+		lock (InitLock)
 		{
 			if (_isInit)
 				return;
@@ -90,7 +90,10 @@ internal static class Manager
 				NativeLibrary.SetDllImportResolver(typeof(Glfw).Assembly, GlfwImportResolver);
 				NativeLibrary.SetDllImportResolver(typeof(Ft).Assembly, FreetypeImportResolver);
 			}
-			catch { }
+			catch
+			{
+				// ignored
+			}
 
 			Glfw.Init();
 			Ft.InitFreeType(out FtLib);
@@ -102,7 +105,7 @@ internal static class Manager
 
 	internal static void Clean()
 	{
-		lock (_initLock)
+		lock (InitLock)
 		{
 			if (!_isInit)
 				return;

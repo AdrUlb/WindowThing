@@ -1,4 +1,4 @@
-﻿namespace RenderThing;
+﻿namespace WindowThing;
 
 [Flags]
 public enum ModifierKeys

@@ -1,13 +1,13 @@
-﻿using static RenderThing.Bindings.Gl.Constants;
+﻿using static WindowThing.Bindings.Gl.Constants;
 using GLenum = System.UInt32;
 
-namespace RenderThing.Bindings.Gl;
+namespace WindowThing.Bindings.Gl;
 
 public enum StringName : GLenum
 {
-	Extensions = GL_EXTENSIONS,
-	Renderer = GL_RENDERER,
-	ShadingLanguageVersion = GL_SHADING_LANGUAGE_VERSION,
-	Vendor = GL_VENDOR,
-	Version = GL_VERSION
+	Extensions = _glExtensions,
+	Renderer = _glRenderer,
+	ShadingLanguageVersion = _glShadingLanguageVersion,
+	Vendor = _glVendor,
+	Version = _glVersion
 }

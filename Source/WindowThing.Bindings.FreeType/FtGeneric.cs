@@ -1,9 +1,11 @@
 #pragma warning disable IDE0051 // Remove unused private members
 
-namespace RenderThing.Bindings.FreeType;
+namespace WindowThing.Bindings.FreeType;
 
 internal readonly struct FtGeneric
 {
-	private readonly nint data;
-	private readonly nint finalizer;
+#pragma warning disable CS0169 // Field is never used
+	private readonly nint _data;
+	private readonly nint _finalizer;
+#pragma warning restore CS0169 // Field is never used
 }

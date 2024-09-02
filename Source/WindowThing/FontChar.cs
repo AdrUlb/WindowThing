@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace RenderThing;
+namespace WindowThing;
 
 internal readonly struct FontChar(Vector2 size, Vector2 sectionOffset, Vector2 drawOffset, Vector2 advance)
 {

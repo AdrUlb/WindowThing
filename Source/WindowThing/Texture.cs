@@ -1,7 +1,7 @@
-﻿using RenderThing.Bindings.Gl;
-using System.Drawing;
+﻿using System.Drawing;
+using WindowThing.Bindings.Gl;
 
-namespace RenderThing;
+namespace WindowThing;
 
 public sealed class Texture : IDisposable
 {

@@ -1,19 +1,21 @@
 #pragma warning disable IDE0051 // Remove unused private members
 
-using FtPos = System.Int64;
+using FtPos = long;
 
-namespace RenderThing.Bindings.FreeType;
+namespace WindowThing.Bindings.FreeType;
 
 public struct FtGlyphMetrics
 {
-	public FtPos width;
-	public FtPos height;
+#pragma warning disable CS0169 // Field is never used
+	public FtPos Width;
+	public FtPos Height;
 
-	private readonly FtPos horiBearingX;
-	private readonly FtPos horiBearingY;
-	private readonly FtPos horiAdvance;
+	private readonly FtPos _horiBearingX;
+	private readonly FtPos _horiBearingY;
+	private readonly FtPos _horiAdvance;
 
-	private readonly FtPos vertBearingX;
-	private readonly FtPos vertBearingY;
-	private readonly FtPos vertAdvance;
+	private readonly FtPos _vertBearingX;
+	private readonly FtPos _vertBearingY;
+	private readonly FtPos _vertAdvance;
+#pragma warning restore CS0169 // Field is never used
 }

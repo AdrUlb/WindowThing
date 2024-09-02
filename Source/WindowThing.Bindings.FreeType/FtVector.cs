@@ -1,9 +1,9 @@
 using FtPos = System.Int64;
 
-namespace RenderThing.Bindings.FreeType;
+namespace WindowThing.Bindings.FreeType;
 
 public struct FtVector
 {
-	public FtPos x;
-	public FtPos y;
+	public FtPos X;
+	public FtPos Y;
 }

@@ -2,10 +2,12 @@
 
 using FtPos = System.Int64;
 
-namespace RenderThing.Bindings.FreeType;
+namespace WindowThing.Bindings.FreeType;
 
 internal readonly struct FtBBox
 {
-	private readonly FtPos xMin, yMin;
-	private readonly FtPos xMax, yMax;
+#pragma warning disable CS0169 // Field is never used
+	private readonly FtPos _xMin, _yMin;
+	private readonly FtPos _xMax, _yMax;
+#pragma warning restore CS0169 // Field is never used
 }

@@ -1,4 +1,4 @@
-namespace RenderThing.Bindings.FreeType;
+namespace WindowThing.Bindings.FreeType;
 
 public struct FtF26Dot6
 {

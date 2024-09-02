@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace RenderThing.Bindings.Gl;
+namespace WindowThing.Bindings.Gl;
 
 public abstract class Gl
 {
@@ -36,12 +36,12 @@ public abstract class Gl
 	public abstract void AttachShader(uint program, uint shader);
 	public abstract void DetachShader(uint program, uint shader);
 	public abstract void LinkProgram(uint program);
-	public abstract int GetProgramiv(uint program, ProgramParameterName pname);
+	public abstract int GetProgramIv(uint program, ProgramParameterName pname);
 	public abstract string GetProgramInfoLog(uint program);
 	public abstract void UseProgram(uint program);
 	public abstract int GetUniformLocation(uint program, string name);
-	public abstract void UniformMatrix4fv(int location, uint count, bool transpose, in Matrix4x4 value);
-	public abstract void Uniform1iv(int location, ReadOnlySpan<int> value);
+	public abstract void UniformMatrix4Fv(int location, uint count, bool transpose, in Matrix4x4 value);
+	public abstract void Uniform1Iv(int location, ReadOnlySpan<int> value);
 	public abstract void DrawElements<T>(DrawMode mode, uint count, IndexType type, Span<T> indices) where T : unmanaged;
 	public abstract void DrawElements(DrawMode mode, uint count, IndexType type, nuint indices);
 	public abstract void GenTextures(Span<uint> textures);

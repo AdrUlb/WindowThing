@@ -1,67 +1,67 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace RenderThing.Bindings.Glfw;
+namespace WindowThing.Bindings.Glfw;
 
 public static partial class Glfw
 {
 	public const string LibraryName = "glfw";
 
-	public const int FOCUSED = 0x00020001;
-	public const int RESIZABLE = 0x00020003;
-	public const int VISIBLE = 0x00020004;
-	public const int DECORATED = 0x00020005;
-	public const int AUTO_ICONIFY = 0x00020006;
-	public const int FLOATING = 0x00020007;
-	public const int MAXIMIZED = 0x00020008;
-	public const int CENTER_CURSOR = 0x00020009;
-	public const int TRANSPARENT_FRAMEBUFFER = 0x0002000A;
-	public const int FOCUS_ON_SHOW = 0x0002000C;
-	public const int RED_BITS = 0x00021001;
-	public const int GREEN_BITS = 0x00021002;
-	public const int BLUE_BITS = 0x00021003;
-	public const int ALPHA_BITS = 0x00021004;
-	public const int DEPTH_BITS = 0x00021005;
-	public const int STENCIL_BITS = 0x00021006;
-	public const int ACCUM_RED_BITS = 0x00021007;
-	public const int ACCUM_GREEN_BITS = 0x00021008;
-	public const int ACCUM_BLUE_BITS = 0x00021009;
-	public const int ACCUM_ALPHA_BITS = 0x0002100A;
-	public const int AUX_BUFFERS = 0x0002100B;
-	public const int STEREO = 0x0002100C;
-	public const int SAMPLES = 0x0002100D;
-	public const int SRGB_CAPABLE = 0x0002100E;
-	public const int REFRESH_RATE = 0x0002100F;
-	public const int DOUBLEBUFFER = 0x00021010;
-	public const int CLIENT_API = 0x00022001;
-	public const int CONTEXT_VERSION_MAJOR = 0x00022002;
-	public const int CONTEXT_VERSION_MINOR = 0x00022003;
-	public const int CONTEXT_ROBUSTNESS = 0x00022005;
-	public const int OPENGL_FORWARD_COMPAT = 0x00022006;
-	public const int OPENGL_DEBUG_CONTEXT = 0x00022007;
-	public const int OPENGL_PROFILE = 0x00022008;
-	public const int CONTEXT_RELEASE_BEHAVIOR = 0x00022009;
-	public const int CONTEXT_CREATION_API = 0x0002200B;
-	public const int SCALE_TO_MONITOR = 0x0002200C;
+	public const int Focused = 0x00020001;
+	public const int Resizable = 0x00020003;
+	public const int Visible = 0x00020004;
+	public const int Decorated = 0x00020005;
+	public const int AutoIconify = 0x00020006;
+	public const int Floating = 0x00020007;
+	public const int Maximized = 0x00020008;
+	public const int CenterCursor = 0x00020009;
+	public const int TransparentFramebuffer = 0x0002000A;
+	public const int FocusOnShow = 0x0002000C;
+	public const int RedBits = 0x00021001;
+	public const int GreenBits = 0x00021002;
+	public const int BlueBits = 0x00021003;
+	public const int AlphaBits = 0x00021004;
+	public const int DepthBits = 0x00021005;
+	public const int StencilBits = 0x00021006;
+	public const int AccumRedBits = 0x00021007;
+	public const int AccumGreenBits = 0x00021008;
+	public const int AccumBlueBits = 0x00021009;
+	public const int AccumAlphaBits = 0x0002100A;
+	public const int AuxBuffers = 0x0002100B;
+	public const int Stereo = 0x0002100C;
+	public const int Samples = 0x0002100D;
+	public const int SrgbCapable = 0x0002100E;
+	public const int RefreshRate = 0x0002100F;
+	public const int Doublebuffer = 0x00021010;
+	public const int ClientApi = 0x00022001;
+	public const int ContextVersionMajor = 0x00022002;
+	public const int ContextVersionMinor = 0x00022003;
+	public const int ContextRobustness = 0x00022005;
+	public const int OpenglForwardCompat = 0x00022006;
+	public const int OpenglDebugContext = 0x00022007;
+	public const int OpenglProfile = 0x00022008;
+	public const int ContextReleaseBehavior = 0x00022009;
+	public const int ContextCreationApi = 0x0002200B;
+	public const int ScaleToMonitor = 0x0002200C;
 
-	public const int COCOA_RETINA_FRAMEBUFFER = 0x00023001;
-	public const int COCOA_FRAME_NAME = 0x00023002;
-	public const int COCOA_GRAPHICS_SWITCHING = 0x00023003;
+	public const int CocoaRetinaFramebuffer = 0x00023001;
+	public const int CocoaFrameName = 0x00023002;
+	public const int CocoaGraphicsSwitching = 0x00023003;
 
-	public const int X11_CLASS_NAME = 0x00024001;
-	public const int X11_INSTANCE_NAME = 0x00024002;
+	public const int X11ClassName = 0x00024001;
+	public const int X11InstanceName = 0x00024002;
 
-	public const int NO_API = 0;
-	public const int OPENGL_API = 0x00030001;
-	public const int OPENGL_ES_API = 0x00030002;
+	public const int NoApi = 0;
+	public const int OpenglApi = 0x00030001;
+	public const int OpenglEsApi = 0x00030002;
 
-	public const int OPENGL_ANY_PROFILE = 0;
-	public const int OPENGL_CORE_PROFILE = 0x00032001;
-	public const int OPENGL_COMPAT_PROFILE = 0x00032002;
+	public const int OpenglAnyProfile = 0;
+	public const int OpenglCoreProfile = 0x00032001;
+	public const int OpenglCompatProfile = 0x00032002;
 
-	public const int ANY_RELEASE_BEHAVIOR = 0;
-	public const int RELEASE_BEHAVIOR_FLUSH = 0x00035001;
-	public const int RELEASE_BEHAVIOR_NONE = 0x00035002;
+	public const int AnyReleaseBehavior = 0;
+	public const int ReleaseBehaviorFlush = 0x00035001;
+	public const int ReleaseBehaviorNone = 0x00035002;
 
 	public delegate void FramebufferSizeFun(GlfwWindowPtr window, int width, int height);
 	public delegate void WindowCloseFun(GlfwWindowPtr window);
@@ -197,14 +197,12 @@ public static partial class Glfw
 		var code = NativeGetError(&strPtr);
 
 		var descLen = 0;
-		for (; strPtr[descLen] != 0; descLen++)
-			;
+		for (; strPtr[descLen] != 0; descLen++) { }
 
 		description = Encoding.UTF8.GetString(strPtr, descLen);
 
 		return code;
 	}
 
-	public static unsafe void SetWindowTitle(GlfwWindowPtr window, string title) => NativeSetWindowTitle(window, title);
+	public static void SetWindowTitle(GlfwWindowPtr window, string title) => NativeSetWindowTitle(window, title);
 }
-

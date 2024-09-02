@@ -1,19 +1,19 @@
-﻿using static RenderThing.Bindings.Gl.Constants;
+﻿using static WindowThing.Bindings.Gl.Constants;
 using GLenum = System.UInt32;
 
-namespace RenderThing.Bindings.Gl;
+namespace WindowThing.Bindings.Gl;
 
 public enum VertexAttribType : GLenum
 {
-	Byte = GL_BYTE,
-	UnsignedByte = GL_UNSIGNED_BYTE,
-	Short = GL_SHORT,
-	UnsignedShort = GL_UNSIGNED_SHORT,
-	Int = GL_INT,
-	UnsignedInt = GL_UNSIGNED_INT,
-	HalfFloat = GL_HALF_FLOAT,
-	Float = GL_FLOAT,
-	Fixed = GL_FIXED,
-	Int2_10_10_10_REV = GL_INT_2_10_10_10_REV,
-	UnsignedInt2_10_10_10_REV = GL_UNSIGNED_INT_2_10_10_10_REV
+	Byte = _glByte,
+	UnsignedByte = _glUnsignedByte,
+	Short = _glShort,
+	UnsignedShort = _glUnsignedShort,
+	Int = _glInt,
+	UnsignedInt = _glUnsignedInt,
+	HalfFloat = _glHalfFloat,
+	Float = _glFloat,
+	Fixed = _glFixed,
+	Int2101010Rev = _glInt2101010Rev,
+	UnsignedInt2101010Rev = _glUnsignedInt2101010Rev
 }

@@ -1,4 +1,4 @@
-﻿namespace RenderThing;
+﻿namespace WindowThing;
 
 public enum KeyboardKey
 {

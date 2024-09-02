@@ -1,229 +1,229 @@
 ﻿using GLbitfield = System.UInt32;
 using GLenum = System.UInt32;
 
-namespace RenderThing.Bindings.Gl;
+namespace WindowThing.Bindings.Gl;
 
 public static class Constants
 {
-	public const GLbitfield GL_DEPTH_BUFFER_BIT = 0x100;
-	public const GLbitfield GL_STENCIL_BUFFER_BIT = 0x400;
-	public const GLbitfield GL_COLOR_BUFFER_BIT = 0x4000;
+	public const GLbitfield _glDepthBufferBit = 0x100;
+	public const GLbitfield _glStencilBufferBit = 0x400;
+	public const GLbitfield _glColorBufferBit = 0x4000;
 
-	public const GLenum GL_ZERO = 0x0;
-	public const GLenum GL_ONE = 0x1;
+	public const GLenum _glZero = 0x0;
+	public const GLenum _glOne = 0x1;
 	
-	public const GLenum GL_POINTS = 0x0;
-	public const GLenum GL_LINES = 0x1;
-	public const GLenum GL_LINE_LOOP = 0x2;
-	public const GLenum GL_LINE_STRIP = 0x3;
-	public const GLenum GL_TRIANGLES = 0x4;
-	public const GLenum GL_TRIANGLE_STRIP = 0x5;
-	public const GLenum GL_TRIANGLE_FAN = 0x6;
+	public const GLenum _glPoints = 0x0;
+	public const GLenum _glLines = 0x1;
+	public const GLenum _glLineLoop = 0x2;
+	public const GLenum _glLineStrip = 0x3;
+	public const GLenum _glTriangles = 0x4;
+	public const GLenum _glTriangleStrip = 0x5;
+	public const GLenum _glTriangleFan = 0x6;
 
-	public const GLenum GL_SRC_COLOR = 0x300;
-	public const GLenum GL_ONE_MINUS_SRC_COLOR = 0x301;
-	public const GLenum GL_SRC_ALPHA = 0x302;
-	public const GLenum GL_ONE_MINUS_SRC_ALPHA = 0x303;
-	public const GLenum GL_DST_ALPHA = 0x304;
-	public const GLenum GL_ONE_MINUS_DST_ALPHA = 0x305;
-	public const GLenum GL_DST_COLOR = 0x306;
-	public const GLenum GL_ONE_MINUS_DST_COLOR = 0x307;
-	public const GLenum GL_SRC_ALPHA_SATURATE = 0x308;
+	public const GLenum _glSrcColor = 0x300;
+	public const GLenum _glOneMinusSrcColor = 0x301;
+	public const GLenum _glSrcAlpha = 0x302;
+	public const GLenum _glOneMinusSrcAlpha = 0x303;
+	public const GLenum _glDstAlpha = 0x304;
+	public const GLenum _glOneMinusDstAlpha = 0x305;
+	public const GLenum _glDstColor = 0x306;
+	public const GLenum _glOneMinusDstColor = 0x307;
+	public const GLenum _glSrcAlphaSaturate = 0x308;
 	
-	public const GLenum GL_CULL_FACE = 0xB44;
+	public const GLenum _glCullFace = 0xB44;
 	
-	public const GLenum GL_DEPTH_TEST = 0xB71;
+	public const GLenum _glDepthTest = 0xB71;
 	
-	public const GLenum GL_STENCIL_TEST = 0xB90;
+	public const GLenum _glStencilTest = 0xB90;
 	
-	public const GLenum GL_DITHER = 0xBD0;
+	public const GLenum _glDither = 0xBD0;
 	
-	public const GLenum GL_BLEND = 0xBE2;
+	public const GLenum _glBlend = 0xBE2;
 	
-	public const GLenum GL_SCISSOR_TEST = 0xC11;
+	public const GLenum _glScissorTest = 0xC11;
 	
-	public const GLenum GL_TEXTURE_2D = 0xDE1;
+	public const GLenum _glTexture2D = 0xDE1;
 
-	public const GLenum GL_BYTE = 0x1400;
-	public const GLenum GL_UNSIGNED_BYTE = 0x1401;
-	public const GLenum GL_SHORT = 0x1402;
-	public const GLenum GL_UNSIGNED_SHORT = 0x1403;
-	public const GLenum GL_INT = 0x1404;
-	public const GLenum GL_UNSIGNED_INT = 0x1405;
-	public const GLenum GL_FLOAT = 0x1406;
+	public const GLenum _glByte = 0x1400;
+	public const GLenum _glUnsignedByte = 0x1401;
+	public const GLenum _glShort = 0x1402;
+	public const GLenum _glUnsignedShort = 0x1403;
+	public const GLenum _glInt = 0x1404;
+	public const GLenum _glUnsignedInt = 0x1405;
+	public const GLenum _glFloat = 0x1406;
 
-	public const GLenum GL_HALF_FLOAT = 0x140B;
-	public const GLenum GL_FIXED = 0x140C;
+	public const GLenum _glHalfFloat = 0x140B;
+	public const GLenum _glFixed = 0x140C;
 
-	public const GLenum GL_DEPTH_COMPONENT = 0x1902;
-	public const GLenum GL_RED = 0x1903;
+	public const GLenum _glDepthComponent = 0x1902;
+	public const GLenum _glRed = 0x1903;
 
-	public const GLenum GL_ALPHA = 0x1906;
-	public const GLenum GL_RGB = 0x1907;
-	public const GLenum GL_RGBA = 0x1908;
-	public const GLenum GL_LUMINANCE = 0x1909;
-	public const GLenum GL_LUMINANCE_ALPHA = 0x190A;
+	public const GLenum _glAlpha = 0x1906;
+	public const GLenum _glRgb = 0x1907;
+	public const GLenum _glRgba = 0x1908;
+	public const GLenum _glLuminance = 0x1909;
+	public const GLenum _glLuminanceAlpha = 0x190A;
 
-	public const GLenum GL_VENDOR = 0x1F00;
-	public const GLenum GL_RENDERER = 0x1F01;
-	public const GLenum GL_VERSION = 0x1F02;
-	public const GLenum GL_EXTENSIONS = 0x1F03;
+	public const GLenum _glVendor = 0x1F00;
+	public const GLenum _glRenderer = 0x1F01;
+	public const GLenum _glVersion = 0x1F02;
+	public const GLenum _glExtensions = 0x1F03;
 	
-	public const GLenum GL_NEAREST = 0x2600;
-	public const GLenum GL_LINEAR = 0x2601;
+	public const GLenum _glNearest = 0x2600;
+	public const GLenum _glLinear = 0x2601;
 
-	public const GLenum GL_NEAREST_MIPMAP_NEAREST = 0x2700;
-	public const GLenum GL_LINEAR_MIPMAP_NEAREST = 0x2701;
-	public const GLenum GL_NEAREST_MIPMAP_LINEAR = 0x2702;
-	public const GLenum GL_LINEAR_MIPMAP_LINEAR = 0x2703;
+	public const GLenum _glNearestMipmapNearest = 0x2700;
+	public const GLenum _glLinearMipmapNearest = 0x2701;
+	public const GLenum _glNearestMipmapLinear = 0x2702;
+	public const GLenum _glLinearMipmapLinear = 0x2703;
 
-	public const GLenum GL_TEXTURE_MAG_FILTER = 0x2800;
-	public const GLenum GL_TEXTURE_MIN_FILTER = 0x2801;
-	public const GLenum GL_TEXTURE_WRAP_S = 0x2802;
-	public const GLenum GL_TEXTURE_WRAP_T = 0x2803;
+	public const GLenum _glTextureMagFilter = 0x2800;
+	public const GLenum _glTextureMinFilter = 0x2801;
+	public const GLenum _glTextureWrapS = 0x2802;
+	public const GLenum _glTextureWrapT = 0x2803;
 
-	public const GLenum GL_REPEAT = 0x2901;
+	public const GLenum _glRepeat = 0x2901;
 
-	public const GLenum GL_CONSTANT_COLOR = 0x8001;
-	public const GLenum GL_ONE_MINUS_CONSTANT_COLOR = 0x8002;
-	public const GLenum GL_CONSTANT_ALPHA = 0x8003;
-	public const GLenum GL_ONE_MINUS_CONSTANT_ALPHA = 0x8004;
+	public const GLenum _glConstantColor = 0x8001;
+	public const GLenum _glOneMinusConstantColor = 0x8002;
+	public const GLenum _glConstantAlpha = 0x8003;
+	public const GLenum _glOneMinusConstantAlpha = 0x8004;
 	
-	public const GLenum GL_UNSIGNED_SHORT_4_4_4_4 = 0x8033;
-	public const GLenum GL_UNSIGNED_SHORT_5_5_5_1 = 0x8034;
+	public const GLenum _glUnsignedShort4444 = 0x8033;
+	public const GLenum _glUnsignedShort5551 = 0x8034;
 
-	public const GLenum GL_POLYGON_OFFSET_FILL = 0x8037;
+	public const GLenum _glPolygonOffsetFill = 0x8037;
 	
-	public const GLenum GL_TEXTURE_3D = 0x806F;
+	public const GLenum _glTexture3D = 0x806F;
 	
-	public const GLenum GL_TEXTURE_WRAP_R = 0x8072;
+	public const GLenum _glTextureWrapR = 0x8072;
 	
-	public const GLenum GL_SAMPLE_ALPHA_TO_COVERAGE = 0x809E;
+	public const GLenum _glSampleAlphaToCoverage = 0x809E;
 	
-	public const GLenum GL_SAMPLE_COVERAGE = 0x80A0;
+	public const GLenum _glSampleCoverage = 0x80A0;
 	
-	public const GLenum GL_CLAMP_TO_EDGE = 0x812F;
+	public const GLenum _glClampToEdge = 0x812F;
 
-	public const GLenum GL_TEXTURE_MIN_LOD = 0x813A;
-	public const GLenum GL_TEXTURE_MAX_LOD = 0x813B;
-	public const GLenum GL_TEXTURE_BASE_LEVEL = 0x813C;
-	public const GLenum GL_TEXTURE_MAX_LEVEL = 0x813D;
+	public const GLenum _glTextureMinLod = 0x813A;
+	public const GLenum _glTextureMaxLod = 0x813B;
+	public const GLenum _glTextureBaseLevel = 0x813C;
+	public const GLenum _glTextureMaxLevel = 0x813D;
 
-	public const GLenum GL_RG = 0x8227;
-	public const GLenum GL_RG_INTEGER = 0x8228;
+	public const GLenum _glRg = 0x8227;
+	public const GLenum _glRgInteger = 0x8228;
 
-	public const GLenum GL_PROGRAM_BINARY_RETRIEVABLE_HINT = 0x8257;
-	public const GLenum GL_PROGRAM_SEPARABLE = 0x8258;
+	public const GLenum _glProgramBinaryRetrievableHint = 0x8257;
+	public const GLenum _glProgramSeparable = 0x8258;
 
-	public const GLenum GL_COMPUTE_WORK_GROUP_SIZE = 0x8267;
+	public const GLenum _glComputeWorkGroupSize = 0x8267;
 
-	public const GLenum GL_UNSIGNED_SHORT_5_6_5 = 0x8363;
+	public const GLenum _glUnsignedShort565 = 0x8363;
 
-	public const GLenum GL_UNSIGNED_INT_2_10_10_10_REV = 0x8368;
+	public const GLenum _glUnsignedInt2101010Rev = 0x8368;
 
-	public const GLenum GL_MIRRORED_REPEAT = 0x8370;
+	public const GLenum _glMirroredRepeat = 0x8370;
 
-	public const GLenum GL_TEXTURE0 = 0x84C0;
+	public const GLenum _glTexture0 = 0x84C0;
 
-	public const GLenum GL_DEPTH_STENCIL = 0x84F9;
-	public const GLenum GL_UNSIGNED_INT_24_8 = 0x84FA;
+	public const GLenum _glDepthStencil = 0x84F9;
+	public const GLenum _glUnsignedInt248 = 0x84FA;
 
-	public const GLenum GL_TEXTURE_CUBE_MAP = 0x8513;
+	public const GLenum _glTextureCubeMap = 0x8513;
 
-	public const GLenum GL_TEXTURE_COMPARE_FUNC = 0x884D;
-	public const GLenum GL_TEXTURE_COMPARE_MODE = 0x884C;
+	public const GLenum _glTextureCompareFunc = 0x884D;
+	public const GLenum _glTextureCompareMode = 0x884C;
 
-	public const GLenum GL_MAX_TEXTURE_IMAGE_UNITS = 0x8872;
+	public const GLenum _glMaxTextureImageUnits = 0x8872;
 
-	public const GLenum GL_ARRAY_BUFFER = 0x8892;
-	public const GLenum GL_ELEMENT_ARRAY_BUFFER = 0x8893;
+	public const GLenum _glArrayBuffer = 0x8892;
+	public const GLenum _glElementArrayBuffer = 0x8893;
 
-	public const GLenum GL_STREAM_DRAW = 0x88E0;
-	public const GLenum GL_STREAM_READ = 0x88E1;
-	public const GLenum GL_STREAM_COPY = 0x88E2;
+	public const GLenum _glStreamDraw = 0x88E0;
+	public const GLenum _glStreamRead = 0x88E1;
+	public const GLenum _glStreamCopy = 0x88E2;
 
-	public const GLenum GL_STATIC_DRAW = 0x88E4;
-	public const GLenum GL_STATIC_READ = 0x88E5;
-	public const GLenum GL_STATIC_COPY = 0x88E6;
+	public const GLenum _glStaticDraw = 0x88E4;
+	public const GLenum _glStaticRead = 0x88E5;
+	public const GLenum _glStaticCopy = 0x88E6;
 
-	public const GLenum GL_DYNAMIC_DRAW = 0x88E8;
-	public const GLenum GL_DYNAMIC_READ = 0x88E9;
-	public const GLenum GL_DYNAMIC_COPY = 0x88EA;
-	public const GLenum GL_PIXEL_PACK_BUFFER = 0x88EB;
-	public const GLenum GL_PIXEL_UNPACK_BUFFER = 0x88EC;
+	public const GLenum _glDynamicDraw = 0x88E8;
+	public const GLenum _glDynamicRead = 0x88E9;
+	public const GLenum _glDynamicCopy = 0x88EA;
+	public const GLenum _glPixelPackBuffer = 0x88EB;
+	public const GLenum _glPixelUnpackBuffer = 0x88EC;
 
-	public const GLenum GL_UNIFORM_BUFFER = 0x8A11;
+	public const GLenum _glUniformBuffer = 0x8A11;
 
-	public const GLenum GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH = 0x8A35;
-	public const GLenum GL_ACTIVE_UNIFORM_BLOCKS = 0x8A36;
+	public const GLenum _glActiveUniformBlockMaxNameLength = 0x8A35;
+	public const GLenum _glActiveUniformBlocks = 0x8A36;
 
-	public const GLenum GL_FRAGMENT_SHADER = 0x8B30;
-	public const GLenum GL_VERTEX_SHADER = 0x8B31;
+	public const GLenum _glFragmentShader = 0x8B30;
+	public const GLenum _glVertexShader = 0x8B31;
 
-	public const GLenum GL_SHADER_TYPE = 0x8B4F;
+	public const GLenum _glShaderType = 0x8B4F;
 
-	public const GLenum GL_DELETE_STATUS = 0x8B80;
-	public const GLenum GL_COMPILE_STATUS = 0x8B81;
-	public const GLenum GL_LINK_STATUS = 0x8B82;
-	public const GLenum GL_VALIDATE_STATUS = 0x8B83;
-	public const GLenum GL_INFO_LOG_LENGTH = 0x8B84;
-	public const GLenum GL_ATTACHED_SHADERS = 0x8B85;
-	public const GLenum GL_ACTIVE_UNIFORMS = 0x8B86;
-	public const GLenum GL_ACTIVE_UNIFORM_MAX_LENGTH = 0x8B87;
-	public const GLenum GL_SHADER_SOURCE_LENGTH = 0x8B88;
-	public const GLenum GL_ACTIVE_ATTRIBUTES = 0x8B89;
-	public const GLenum GL_ACTIVE_ATTRIBUTE_MAX_LENGTH = 0x8B8A;
+	public const GLenum _glDeleteStatus = 0x8B80;
+	public const GLenum _glCompileStatus = 0x8B81;
+	public const GLenum _glLinkStatus = 0x8B82;
+	public const GLenum _glValidateStatus = 0x8B83;
+	public const GLenum _glInfoLogLength = 0x8B84;
+	public const GLenum _glAttachedShaders = 0x8B85;
+	public const GLenum _glActiveUniforms = 0x8B86;
+	public const GLenum _glActiveUniformMaxLength = 0x8B87;
+	public const GLenum _glShaderSourceLength = 0x8B88;
+	public const GLenum _glActiveAttributes = 0x8B89;
+	public const GLenum _glActiveAttributeMaxLength = 0x8B8A;
 
-	public const GLenum GL_SHADING_LANGUAGE_VERSION = 0x8B8C;
+	public const GLenum _glShadingLanguageVersion = 0x8B8C;
 
-	public const GLenum GL_TEXTURE_2D_ARRAY = 0x8C1A;
+	public const GLenum _glTexture2DArray = 0x8C1A;
 
-	public const GLenum GL_UNSIGNED_INT_10F_11F_11F_REV = 0x8C3B;
+	public const GLenum _glUnsignedInt10F11F11FRev = 0x8C3B;
 
-	public const GLenum GL_UNSIGNED_INT_5_9_9_9_REV = 0x8C3E;
+	public const GLenum _glUnsignedInt5999Rev = 0x8C3E;
 
-	public const GLenum GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH = 0x8C76;
-	public const GLenum GL_TRANSFORM_FEEDBACK_BUFFER_MODE = 0x8C7F;
-	public const GLenum GL_TRANSFORM_FEEDBACK_VARYINGS = 0x8C83;
+	public const GLenum _glTransformFeedbackVaryingMaxLength = 0x8C76;
+	public const GLenum _glTransformFeedbackBufferMode = 0x8C7F;
+	public const GLenum _glTransformFeedbackVaryings = 0x8C83;
 
-	public const GLenum GL_RASTERIZER_DISCARD = 0x8C89;
+	public const GLenum _glRasterizerDiscard = 0x8C89;
 	
-	public const GLenum GL_TRANSFORM_FEEDBACK_BUFFER = 0x8C8E;
+	public const GLenum _glTransformFeedbackBuffer = 0x8C8E;
 
-	public const GLenum GL_PRIMITIVE_RESTART_FIXED_INDEX = 0x8D69;
+	public const GLenum _glPrimitiveRestartFixedIndex = 0x8D69;
 	
-	public const GLenum GL_RED_INTEGER = 0x8D94;
+	public const GLenum _glRedInteger = 0x8D94;
 
-	public const GLenum GL_RGB_INTEGER = 0x8D98;
-	public const GLenum GL_RGBA_INTEGER = 0x8D99;
+	public const GLenum _glRgbInteger = 0x8D98;
+	public const GLenum _glRgbaInteger = 0x8D99;
 
-	public const GLenum GL_INT_2_10_10_10_REV = 0x8D9F;
+	public const GLenum _glInt2101010Rev = 0x8D9F;
 
-	public const GLenum GL_FLOAT_32_UNSIGNED_INT_24_8_REV = 0x8DAD;
+	public const GLenum _glFloat32UnsignedInt248Rev = 0x8DAD;
 
-	public const GLenum GL_TEXTURE_SWIZZLE_R = 0x8E42;
-	public const GLenum GL_TEXTURE_SWIZZLE_G = 0x8E43;
-	public const GLenum GL_TEXTURE_SWIZZLE_B = 0x8E44;
-	public const GLenum GL_TEXTURE_SWIZZLE_A = 0x8E45;
+	public const GLenum _glTextureSwizzleR = 0x8E42;
+	public const GLenum _glTextureSwizzleG = 0x8E43;
+	public const GLenum _glTextureSwizzleB = 0x8E44;
+	public const GLenum _glTextureSwizzleA = 0x8E45;
 
-	public const GLenum GL_SAMPLE_MASK = 0x8E51;
+	public const GLenum _glSampleMask = 0x8E51;
 
-	public const GLenum GL_COPY_READ_BUFFER = 0x8F36;
-	public const GLenum GL_COPY_WRITE_BUFFER = 0x8F37;
+	public const GLenum _glCopyReadBuffer = 0x8F36;
+	public const GLenum _glCopyWriteBuffer = 0x8F37;
 
-	public const GLenum GL_DRAW_INDIRECT_BUFFER = 0x8F3F;
+	public const GLenum _glDrawIndirectBuffer = 0x8F3F;
 
-	public const GLenum GL_SHADER_STORAGE_BUFFER = 0x90D2;
+	public const GLenum _glShaderStorageBuffer = 0x90D2;
 
-	public const GLenum GL_DISPATCH_INDIRECT_BUFFER = 0x90EE;
+	public const GLenum _glDispatchIndirectBuffer = 0x90EE;
 
-	public const GLenum GL_TEXTURE_2D_MULTISAMPLE = 0x9100;
+	public const GLenum _glTexture2DMultisample = 0x9100;
 
-	public const GLenum GL_COMPUTE_SHADER = 0x91B9;
+	public const GLenum _glComputeShader = 0x91B9;
 
-	public const GLenum GL_ATOMIC_COUNTER_BUFFER = 0x92C0;
+	public const GLenum _glAtomicCounterBuffer = 0x92C0;
 
-	public const GLenum GL_ACTIVE_ATOMIC_COUNTER_BUFFERS = 0x92D9;
+	public const GLenum _glActiveAtomicCounterBuffers = 0x92D9;
 
-	public const GLenum GL_DEPTH_STENCIL_TEXTURE_MODE = 0x90EA;
+	public const GLenum _glDepthStencilTextureMode = 0x90EA;
 }

@@ -3,29 +3,34 @@
 using FtInt = System.Int32;
 using FtUInt = System.UInt32;
 
-namespace RenderThing.Bindings.FreeType;
+namespace WindowThing.Bindings.FreeType;
 
 public unsafe readonly struct FtGlyphSlot
 {
+	// ReSharper disable once UnassignedReadonlyField
 	public readonly FtGlyphSlotRec* Rec;
 }
 
-public unsafe struct FtGlyphSlotRec
+public struct FtGlyphSlotRec
 {
-	private readonly FtLibrary library;
-	private readonly FtFace face;
-	private readonly FtGlyphSlot next;
-	private readonly FtUInt glyph_index;
-	private readonly FtGeneric generic;
-	
-	public FtGlyphMetrics metrics;
-	private FtFixed linearHoriAdvance;
-	private FtFixed linearVertAdvance;
-	public FtVector advance;
-	
-	private readonly FtGlyphFormat format;
-	
-	public FtBitmap bitmap;
-	public FtInt bitmap_left;
-	public FtInt bitmap_top;
+#pragma warning disable CS0169 // Field is never used
+	private readonly FtLibrary _library;
+	private readonly FtFace _face;
+	private readonly FtGlyphSlot _next;
+	private readonly FtUInt _glyphIndex;
+	private readonly FtGeneric _generic;
+
+	public FtGlyphMetrics Metrics;
+	private FtFixed _linearHoriAdvance;
+	private FtFixed _linearVertAdvance;
+// ReSharper disable UnassignedField.Global
+	public FtVector Advance;
+
+	private readonly FtGlyphFormat _format;
+
+	public FtBitmap Bitmap;
+	public FtInt BitmapLeft;
+	public FtInt BitmapTop;
+// ReSharper restore UnassignedField.Global
+#pragma warning restore CS0169 // Field is never used
 }

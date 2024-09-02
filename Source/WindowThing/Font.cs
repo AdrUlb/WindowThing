@@ -1,16 +1,16 @@
-﻿using RenderThing.Bindings.FreeType;
-using System.Drawing;
+﻿using System.Drawing;
+using WindowThing.Bindings.FreeType;
 
-namespace RenderThing;
+namespace WindowThing;
 
 public sealed class Font : IDisposable
 {
 	internal readonly Texture Texture = new();
 
-	private readonly Dictionary<char, FontChar> chars = new();
-	private readonly FtFace face;
+	private readonly Dictionary<char, FontChar> _chars = new();
+	private readonly FtFace _face;
 
-	private uint offX = 0;
+	private uint _offX = 0;
 
 	public readonly float Size;
 
@@ -18,23 +18,23 @@ public sealed class Font : IDisposable
 	{
 		Size = size;
 
-		Ft.NewFace(Manager.FtLib, filePath, 0, out face);
-		Ft.SetCharSize(face, size, 0, 100, 0);
+		Ft.NewFace(Manager.FtLib, filePath, 0, out _face);
+		Ft.SetCharSize(_face, size, 0, 100, 0);
 	}
 
 	internal unsafe FontChar GetChar(char c)
 	{
-		if (chars.TryGetValue(c, out var ret))
+		if (_chars.TryGetValue(c, out var ret))
 			return ret;
 
-		Ft.LoadChar(face, c, FtLoadFlags.Render);
-		var glyph = face.Rec->glyph.Rec;
+		Ft.LoadChar(_face, c, FtLoadFlags.Render);
+		var glyph = _face.Rec->Glyph.Rec;
 
-		var w = glyph->bitmap.width;
-		var h = glyph->bitmap.rows;
-		var p = glyph->bitmap.pitch;
+		var w = glyph->Bitmap.Width;
+		var h = glyph->Bitmap.Rows;
+		var p = glyph->Bitmap.Pitch;
 
-		if (w > Texture.Width - offX || h > Texture.Height)
+		if (w > Texture.Width - _offX || h > Texture.Height)
 		{
 			var newW = Math.Max(Texture.Width, Texture.Width + w);
 			var newH = Math.Max(Texture.Height, h);
@@ -42,22 +42,22 @@ public sealed class Font : IDisposable
 			Texture.SetSize(newW, newH);
 		}
 
-		var b = (byte*)glyph->bitmap.buffer;
+		var b = (byte*)glyph->Bitmap.Buffer;
 
 		for (uint y = 0; y < h; y++)
 			for (uint x = 0; x < w; x++)
-				Texture[(int)(x + offX), (int)y] = Color.FromArgb(b[x + (y * p)], 255, 255, 255);
+				Texture[(int)(x + _offX), (int)y] = Color.FromArgb(b[x + (y * p)], 255, 255, 255);
 
-		ret = new(new(w, h), new(offX, 0), new(glyph->bitmap_left, glyph->bitmap_top), new(glyph->advance.x / 64.0f, glyph->advance.y / 64.0f));
-		chars.Add(c, ret);
-		offX += w;
+		ret = new(new(w, h), new(_offX, 0), new(glyph->BitmapLeft, glyph->BitmapTop), new(glyph->Advance.X / 64.0f, glyph->Advance.Y / 64.0f));
+		_chars.Add(c, ret);
+		_offX += w;
 		return ret;
 	}
 
 	private void Dispose(bool disposing)
 	{
 		Texture.Dispose();
-		Ft.DoneFace(face);
+		Ft.DoneFace(_face);
 	}
 
 	~Font() => Dispose(false);

@@ -1,14 +1,14 @@
-using RenderThing.Bindings.Gl;
-using RenderThing.Bindings.Glfw;
 using System.Drawing;
 using System.Numerics;
+using WindowThing.Bindings.Gl;
+using WindowThing.Bindings.Glfw;
 
-namespace RenderThing;
+namespace WindowThing;
 
 public abstract class Window : IDisposable
 {
 	private readonly GlfwWindowPtr _glfwWindow;
-	private readonly Renderer renderer;
+	private readonly Renderer _renderer;
 
 	private bool _running = false;
 
@@ -63,8 +63,8 @@ public abstract class Window : IDisposable
 	{
 		Manager.Init();
 
-		Glfw.WindowHint(GlfwWindowHint.ClientApi, Glfw.OPENGL_API);
-		Glfw.WindowHint(GlfwWindowHint.OpenglProfile, Glfw.OPENGL_CORE_PROFILE);
+		Glfw.WindowHint(GlfwWindowHint.ClientApi, Glfw.OpenglApi);
+		Glfw.WindowHint(GlfwWindowHint.OpenglProfile, Glfw.OpenglCoreProfile);
 		Glfw.WindowHint(GlfwWindowHint.OpenglForwardCompat, 1);
 		Glfw.WindowHint(GlfwWindowHint.ContextVersionMajor, 3);
 		Glfw.WindowHint(GlfwWindowHint.ContextVersionMinor, 3);
@@ -79,8 +79,8 @@ public abstract class Window : IDisposable
 
 		Glfw.SetWindowCloseCallback(_glfwWindow, _closeFun = _ => OnCloseClicked());
 
-		renderer = new(new DesktopGl(Glfw.GetProcAddress));
-		renderer.SetViewportSize((uint)Size.Width, (uint)Size.Height);
+		_renderer = new(new DesktopGl(Glfw.GetProcAddress));
+		_renderer.SetViewportSize((uint)Size.Width, (uint)Size.Height);
 
 		Glfw.MakeContextCurrent(0);
 
@@ -133,13 +133,13 @@ public abstract class Window : IDisposable
 
 		Glfw.MakeContextCurrent(_glfwWindow);
 		Glfw.GetFramebufferSize(_glfwWindow, out var w, out var h);
-		renderer.SetViewportSize((uint)w, (uint)h);
+		_renderer.SetViewportSize((uint)w, (uint)h);
 		OnRun();
 		while (_running)
 		{
 			Glfw.PollEvents();
-			OnRender(renderer);
-			renderer.Commit();
+			OnRender(_renderer);
+			_renderer.Commit();
 			Glfw.SwapBuffers(_glfwWindow);
 		}
 		OnStop();
@@ -153,7 +153,7 @@ public abstract class Window : IDisposable
 
 	private void HandleFramebufferResize(int width, int height)
 	{
-		renderer.SetViewportSize((uint)width, (uint)height);
+		_renderer.SetViewportSize((uint)width, (uint)height);
 	}
 
 	protected abstract void OnRun();
@@ -178,7 +178,7 @@ public abstract class Window : IDisposable
 		Glfw.MakeContextCurrent(_glfwWindow);
 
 		if (disposing)
-			renderer.Dispose();
+			_renderer.Dispose();
 
 		Glfw.MakeContextCurrent(0);
 		Glfw.DestroyWindow(_glfwWindow);

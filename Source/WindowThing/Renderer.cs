@@ -1,13 +1,13 @@
-using RenderThing.Bindings.Gl;
-using RenderThing.Bindings.Gl.Abstractions;
 using System.Diagnostics;
 using System.Drawing;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using WindowThing.Bindings.Gl;
+using WindowThing.Bindings.Gl.Abstractions;
 
-namespace RenderThing;
+namespace WindowThing;
 
 public sealed class Renderer : IDisposable
 {
@@ -29,7 +29,7 @@ public sealed class Renderer : IDisposable
 		layout (location = 1) in vec4 aColor;
 		layout (location = 2) in vec2 aTexCoord;
 		layout (location = 3) in int aTexIndex;
-		
+
 		out vec4 vColor;
 		out vec2 vTexCoord;
 		flat out int vTexIndex;
@@ -76,7 +76,7 @@ public sealed class Renderer : IDisposable
 	private const int _indicesPerQuad = 6;
 	private const int _maxQuadsPerBatch = 20_000;
 
-	internal readonly Gl _gl;
+	internal readonly Gl Gl;
 
 	private readonly int _maxTexturesPerBatch;
 
@@ -99,11 +99,11 @@ public sealed class Renderer : IDisposable
 		if (ThreadGl != null)
 			throw new UnreachableException();
 
-		_gl = gl;
+		Gl = gl;
 		ThreadGl = gl;
 
 		// Get maximum number of textures that the shader can access at the same time
-		_gl.GetIntegerv(IntegerParameterName.MaxTextureImageUnits, out _maxTexturesPerBatch);
+		Gl.GetIntegerv(IntegerParameterName.MaxTextureImageUnits, out _maxTexturesPerBatch);
 		var texIndexCases = new StringBuilder();
 
 		// sampler2D arrays may only be indexed using a constant according to the specification
@@ -115,37 +115,37 @@ public sealed class Renderer : IDisposable
 		fragmentShaderSourceRep.Replace("$texturesPerBatch$", _maxTexturesPerBatch.ToString());
 
 		// Compile and link the shader program
-		using (var vso = new ShaderObject(_gl, ShaderType.Vertex, _vertexShaderSource))
-		using (var fso = new ShaderObject(_gl, ShaderType.Fragment, fragmentShaderSourceRep.ToString()))
-			_spo = new(_gl, vso, fso);
+		using (var vso = new ShaderObject(Gl, ShaderType.Vertex, _vertexShaderSource))
+		using (var fso = new ShaderObject(Gl, ShaderType.Fragment, fragmentShaderSourceRep.ToString()))
+			_spo = new(Gl, vso, fso);
 
-		_vbo = new(_gl);
-		_ebo = new(_gl);
-		_vao = new(_gl);
+		_vbo = new(Gl);
+		_ebo = new(Gl);
+		_vao = new(Gl);
 
-		_gl.BindVertexArray(_vao);
+		Gl.BindVertexArray(_vao);
 
-		_gl.BindBuffer(BufferTarget.Array, _vbo);
-		_gl.BufferData(BufferTarget.Array, (nuint)sizeof(Vertex) * _verticesPerQuad * _maxQuadsPerBatch, 0, BufferUsage.DynamicDraw);
+		Gl.BindBuffer(BufferTarget.Array, _vbo);
+		Gl.BufferData(BufferTarget.Array, (nuint)sizeof(Vertex) * _verticesPerQuad * _maxQuadsPerBatch, 0, BufferUsage.DynamicDraw);
 		nuint offset = 0;
-		_gl.VertexAttribPointer(0, 2, VertexAttribType.Float, false, (uint)sizeof(Vertex), offset);
+		Gl.VertexAttribPointer(0, 2, VertexAttribType.Float, false, (uint)sizeof(Vertex), offset);
 		offset += (nuint)sizeof(Vector2);
 
-		_gl.VertexAttribPointer(1, 4, VertexAttribType.Float, false, (uint)sizeof(Vertex), offset);
+		Gl.VertexAttribPointer(1, 4, VertexAttribType.Float, false, (uint)sizeof(Vertex), offset);
 		offset += (nuint)sizeof(Vector4);
 
-		_gl.VertexAttribPointer(2, 2, VertexAttribType.Float, false, (uint)sizeof(Vertex), offset);
+		Gl.VertexAttribPointer(2, 2, VertexAttribType.Float, false, (uint)sizeof(Vertex), offset);
 		offset += (nuint)sizeof(Vector2);
 
-		_gl.VertexAttribIPointer(3, 1, VertexAttribType.Int, (uint)sizeof(Vertex), offset);
+		Gl.VertexAttribIPointer(3, 1, VertexAttribType.Int, (uint)sizeof(Vertex), offset);
 		offset += sizeof(int);
 
-		_gl.EnableVertexAttribArray(0);
-		_gl.EnableVertexAttribArray(1);
-		_gl.EnableVertexAttribArray(2);
-		_gl.EnableVertexAttribArray(3);
+		Gl.EnableVertexAttribArray(0);
+		Gl.EnableVertexAttribArray(1);
+		Gl.EnableVertexAttribArray(2);
+		Gl.EnableVertexAttribArray(3);
 
-		_gl.BindBuffer(BufferTarget.ElementArray, _ebo);
+		Gl.BindBuffer(BufferTarget.ElementArray, _ebo);
 		var indices = new uint[_indicesPerQuad * _maxQuadsPerBatch];
 		for (var i = 0; i < _maxQuadsPerBatch; i++)
 		{
@@ -156,12 +156,12 @@ public sealed class Renderer : IDisposable
 			indices[(i * _indicesPerQuad) + 4] = 2 + ((uint)i * _verticesPerQuad);
 			indices[(i * _indicesPerQuad) + 5] = 3 + ((uint)i * _verticesPerQuad);
 		}
-		_gl.BufferData<uint>(BufferTarget.ElementArray, indices, BufferUsage.StaticDraw);
+		Gl.BufferData<uint>(BufferTarget.ElementArray, indices, BufferUsage.StaticDraw);
 
-		_gl.BindVertexArray(0);
+		Gl.BindVertexArray(0);
 
-		_gl.Enable(Cap.Blend);
-		_gl.BlendFunc(BlendFactor.SrcAlpha, BlendFactor.OneMinusSrcAlpha);
+		Gl.Enable(Cap.Blend);
+		Gl.BlendFunc(BlendFactor.SrcAlpha, BlendFactor.OneMinusSrcAlpha);
 
 		_batchTextures = new Texture[_maxTexturesPerBatch];
 
@@ -169,7 +169,7 @@ public sealed class Renderer : IDisposable
 		Span<int> textureIndices = new int[_maxTexturesPerBatch];
 		for (var i = 0; i < textureIndices.Length; i++)
 			textureIndices[i] = i;
-		_spo.Uniform1iv(loc, textureIndices);
+		_spo.Uniform1Iv(loc, textureIndices);
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -177,7 +177,7 @@ public sealed class Renderer : IDisposable
 
 	internal void SetViewportSize(uint width, uint height)
 	{
-		_gl.Viewport(0, 0, width, height);
+		Gl.Viewport(0, 0, width, height);
 
 		var projection = Matrix4x4.CreateOrthographicOffCenter(0.0f, width, height, 0.0f, -1.0f, 1.0f);
 		var loc = _spo.GetUniformLocation("uProjection");
@@ -187,8 +187,8 @@ public sealed class Renderer : IDisposable
 	public void Clear(Color color)
 	{
 		var colorVec = ColorToVec4(color);
-		_gl.ClearColor(colorVec.X, colorVec.Y, colorVec.Z, colorVec.W);
-		_gl.Clear(ClearMask.ColorBuffer);
+		Gl.ClearColor(colorVec.X, colorVec.Y, colorVec.Z, colorVec.W);
+		Gl.Clear(ClearMask.ColorBuffer);
 	}
 
 	private int GetBatchTextureIndex(Texture texture)
@@ -305,19 +305,19 @@ public sealed class Renderer : IDisposable
 
 		for (var i = 0u; i < _batchTextureCount; i++)
 		{
-			_gl.ActiveTexture(Constants.GL_TEXTURE0 + i);
-			_gl.BindTexture(TextureTarget.Texture2D, _batchTextures[i].Id);
+			Gl.ActiveTexture(Constants._glTexture0 + i);
+			Gl.BindTexture(TextureTarget.Texture2D, _batchTextures[i].Id);
 			_batchTextures[i].CommitGlTexture();
 		}
 
-		_gl.BindBuffer(BufferTarget.Array, _vbo);
-		_gl.BufferSubData<Vertex>(BufferTarget.Array, 0, _batchVertices.AsSpan()[0..(_batchQuadCount * _verticesPerQuad)]);
+		Gl.BindBuffer(BufferTarget.Array, _vbo);
+		Gl.BufferSubData<Vertex>(BufferTarget.Array, 0, _batchVertices.AsSpan()[0..(_batchQuadCount * _verticesPerQuad)]);
 
 		_spo.Use();
 
-		_gl.BindVertexArray(_vao);
-		_gl.DrawElements(DrawMode.Triangles, (uint)(_batchQuadCount * _indicesPerQuad), IndexType.UnsignedInt, 0);
-		_gl.BindVertexArray(0);
+		Gl.BindVertexArray(_vao);
+		Gl.DrawElements(DrawMode.Triangles, (uint)(_batchQuadCount * _indicesPerQuad), IndexType.UnsignedInt, 0);
+		Gl.BindVertexArray(0);
 
 		_batchQuadCount = 0;
 		_batchTextureCount = 0;
@@ -327,6 +327,7 @@ public sealed class Renderer : IDisposable
 	{
 		ThreadGl = null;
 		_vao.Dispose();
+		_ebo.Dispose();
 		_vbo.Dispose();
 		_spo.Dispose();
 	}

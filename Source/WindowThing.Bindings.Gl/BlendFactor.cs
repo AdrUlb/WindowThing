@@ -1,23 +1,23 @@
-using static RenderThing.Bindings.Gl.Constants;
+using static WindowThing.Bindings.Gl.Constants;
 using GLenum = System.UInt32;
 
-namespace RenderThing.Bindings.Gl;
+namespace WindowThing.Bindings.Gl;
 
 public enum BlendFactor : GLenum
 {
-	Zero = GL_ZERO,
-	One = GL_ONE,
-	SrcColor = GL_SRC_COLOR,
-	OneMinusSrcColor = GL_ONE_MINUS_SRC_COLOR,
-	DstColor = GL_DST_COLOR,
-	OneMinusDstColor = GL_ONE_MINUS_DST_COLOR,
-	SrcAlpha = GL_SRC_ALPHA,
-	OneMinusSrcAlpha = GL_ONE_MINUS_SRC_ALPHA,
-	DstAlpha = GL_DST_ALPHA,
-	OneMinusDstAlpha = GL_ONE_MINUS_DST_ALPHA,
-	ConstantColor = GL_CONSTANT_COLOR,
-	OneMinusConstantColor = GL_ONE_MINUS_CONSTANT_COLOR,
-	ConstantAlpha = GL_CONSTANT_ALPHA,
-	OneMinusConstantAlpha = GL_ONE_MINUS_CONSTANT_ALPHA,
-	SrcAlphaSaturate = GL_SRC_ALPHA_SATURATE
+	Zero = _glZero,
+	One = _glOne,
+	SrcColor = _glSrcColor,
+	OneMinusSrcColor = _glOneMinusSrcColor,
+	DstColor = _glDstColor,
+	OneMinusDstColor = _glOneMinusDstColor,
+	SrcAlpha = _glSrcAlpha,
+	OneMinusSrcAlpha = _glOneMinusSrcAlpha,
+	DstAlpha = _glDstAlpha,
+	OneMinusDstAlpha = _glOneMinusDstAlpha,
+	ConstantColor = _glConstantColor,
+	OneMinusConstantColor = _glOneMinusConstantColor,
+	ConstantAlpha = _glConstantAlpha,
+	OneMinusConstantAlpha = _glOneMinusConstantAlpha,
+	SrcAlphaSaturate = _glSrcAlphaSaturate
 }
