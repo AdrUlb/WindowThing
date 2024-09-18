@@ -46,7 +46,7 @@ internal static class Manager
 
 	private static nint FreetypeImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
 	{
-		if (libraryName != Ft._libraryName)
+		if (libraryName != Ft.LibraryName)
 			return 0;
 
 		if (_libFreetypeHandle != 0)

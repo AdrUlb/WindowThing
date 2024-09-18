@@ -7,24 +7,24 @@ namespace WindowThing.Bindings.FreeType;
 
 public static partial class Ft
 {
-	public const string _libraryName = "freetype";
+	public const string LibraryName = "freetype";
 
-	[LibraryImport(_libraryName, EntryPoint = "FT_Init_FreeType")]
+	[LibraryImport(LibraryName, EntryPoint = "FT_Init_FreeType")]
 	private static partial FtError NativeInitFreeType(out FtLibrary alibrary);
 
-	[LibraryImport(_libraryName, EntryPoint = "FT_Done_FreeType")]
+	[LibraryImport(LibraryName, EntryPoint = "FT_Done_FreeType")]
 	private static partial FtError NativeDoneFreeType(FtLibrary library);
 
-	[LibraryImport(_libraryName, EntryPoint = "FT_New_Face")]
+	[LibraryImport(LibraryName, EntryPoint = "FT_New_Face")]
 	private static partial FtError NativeNewFace(FtLibrary library, [MarshalAs(UnmanagedType.LPUTF8Str)] string filepathname, FtLong faceIndex, out FtFace aface);
 
-	[LibraryImport(_libraryName, EntryPoint = "FT_Done_Face")]
+	[LibraryImport(LibraryName, EntryPoint = "FT_Done_Face")]
 	private static partial FtError NativeDoneFace(FtFace face);
 
-	[LibraryImport(_libraryName, EntryPoint = "FT_Set_Char_Size")]
+	[LibraryImport(LibraryName, EntryPoint = "FT_Set_Char_Size")]
 	private static partial FtError NativeSetCharSize(FtFace face, FtF26Dot6 charWidth, FtF26Dot6 charHeight, FtUInt horzResolution, FtUInt vertResolution);
 
-	[LibraryImport(_libraryName, EntryPoint = "FT_Load_Char")]
+	[LibraryImport(LibraryName, EntryPoint = "FT_Load_Char")]
 	private static partial FtError NativeLoadChar(FtFace face, FtULong charCode, FtLoadFlags loadFlags);
 
 	public static FtError InitFreeType(out FtLibrary alibrary) => NativeInitFreeType(out alibrary);
